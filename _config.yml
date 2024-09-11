@@ -7,14 +7,14 @@ title: Pleasant233
 subtitle: ''
 description: ''
 keywords:
-author: pleasant233
-language: cn
+author: John Doe
+language: en
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://Pleasant233.github.io
-permalink: :title/
+url: http://example.com
+permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -43,15 +43,14 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+syntax_highlighter: highlight.js
 highlight:
-  enable: true
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
 prismjs:
-  enable: false
   preprocess: true
   line_number: true
   tab_replace: ''
@@ -98,7 +97,21 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: butterfly
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+bangumis:
+  enable: true              # 是否启用
+  path: bangumis/index.html # 生成追番页面的路径
+  show: 1                   # 想看，在看，看完
+  title: '追番列表'          # 标题
+  quote: '生命不息，追番不止' # 格言
+  color_meta: "#555"        # 追番项元数据的颜色
+  color_summary: "#555"     # 追番项简介的颜色
+  bgmtv_uid: 913378       # bgm.tv的uid
+  download_image: true      # 下载图片并使用本地图片，否则使用bgm.tv提供的网络图源
+  image_level: c            # 图片高清等级 (l, c, m, s, g)
+  lazyload: true            # 是否开启懒加载
+  margin: 20px              # 封面图的偏移量微调
