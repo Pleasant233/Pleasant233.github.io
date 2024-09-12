@@ -29,13 +29,15 @@ title: 博客搭建感想
   ### github的使用
    * 首先，下载githubdesktop，这个在你的库里local选项就能下载，为了方便起见，本文还是给大家配图
    * 配图使用PicGo，同样也会给大家介绍，并且介绍obsidian中的PicGo联动小功能！
-   * https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-12%20111142.png
+  ![](https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-12%20111142.png)
+  <img src ="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-12%20111142.png">
    * 下载安装完成后，我们就可以将线上的库克隆到本地了，这里各位自行摸索即可，很简单，就不再赘述
   ### 在bush窗口中完成部署 
    * 克隆完成后，我们需要再本地进行编辑，首先，找到克隆库所在本地文件夹，在文件夹中右键
    * 打开选项栏，选择open git bash here
    * 然后我们就嫩得到一个这样的窗口，很好，你已经几乎要完成它了！
-   * https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912111820.png
+  ![https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912111820.png]
+  <img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912111820.png">
    * 随后，我们需要先安装hexo框架，在对话框中输入：
    `$ npm install -g hexo-cli `
    * 等待安装完成，在这里你可以加速这个过程，可将上述代码替换为：
@@ -46,7 +48,8 @@ title: 博客搭建感想
    * 之后我们继续键入`cnpm install`来安装依赖，请确保你进行了上一步！
    * 在此之后，我们就完成了全部部署，你可以输入`hexo g`来检测部署结果
    * 若如图所示，则说明部署完成：
-   * https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912112800.png
+  ![https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912112800.png]
+  <img src ="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912112800.png">
    * 请注意，上图中，butterfly字样是主题，若未安装是不会显示的，这无伤大雅。
   ### 配合github上传
    * 第一阶段我们的githubdesktop就排上用场了，你只需要在面板中点击commit，
