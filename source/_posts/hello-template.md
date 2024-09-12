@@ -11,7 +11,7 @@ title: 博客搭建感想
      可参考hexo框架官网：https://hexo.io/zh-cn/
    * 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。
      * node.js 官网：https://nodejs.org/zh-cn
-     * 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershall，粘贴你复制的代码
+     * 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码
      * 等待安装完成就可以了 
    * 下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。
      * 同样可以在官网下载：https://git-scm.com/ 
@@ -33,18 +33,19 @@ title: 博客搭建感想
    * 下载安装完成后，我们就可以将线上的库克隆到本地了，这里各位自行摸索即可，很简单，就不再赘述
   ### 在bush窗口中完成部署 
    * 克隆完成后，我们需要再本地进行编辑，首先，找到克隆库所在本地文件夹，在文件夹中右键
-   * 打开选项栏，选择open git bash here
+   * 打开选项栏，选择open git bush here
    * 然后我们就嫩得到一个这样的窗口，很好，你已经几乎要完成它了！
   <img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912111820.png">
    * 随后，我们需要先安装hexo框架，在对话框中输入：
    `$ npm install -g hexo-cli `
    * 等待安装完成，在这里你可以加速这个过程，可将上述代码替换为：
    `$ cnpm install -g hexo-cli`
-   * 这是一个国内镜像，但前提是你需要下载它，你可以通过powershall输入：
-   `npm install -g cnpm --registry=https://registry.nmpmirror.com `
+   * 这是一个国内镜像，但前提是你需要下载它，你可以通过powershell输入：
+   `npm install -g cnpm --registry=https://registry.npmmirror.com `
    下载完成后，之后的所有需要npm的代码就都可以用cnpm替换了
    * 之后我们继续键入`cnpm install`来安装依赖，请确保你进行了上一步！
    * 在此之后，我们就完成了全部部署，你可以输入`hexo g`来检测部署结果
+   * 注意！按此方式部署的hexo是局部的，所以需要输入`npx+hexo...`命令！注意区分
    * 若如图所示，则说明部署完成：
   <img src ="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240912112800.png">
    * 请注意，上图中，butterfly字样是主题，若未安装是不会显示的，这无伤大雅。
