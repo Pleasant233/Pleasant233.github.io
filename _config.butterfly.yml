@@ -17,7 +17,6 @@ nav:
   fixed: false
 
 menu:
-  Search: /search/|| fas fa-search
   Bangumis: /bangumis/ || fas fa-video
   Archives: /archives/|| fas fa-archive
   主页: / || fas fa-home
