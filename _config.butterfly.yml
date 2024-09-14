@@ -46,8 +46,8 @@ code_blocks:
   fullpage: false
 
 # Social media links
-# Formal:
-#   icon: link || the description || color
+Formal:
+  icon: link || the description || color
 social:
   fab fa-github: https://github.com/Pleasant233 || Github || '#24292e'
   fas fa-envelope: mailto:wangshuq1122@163.com || Email || '#4a7dbe'
