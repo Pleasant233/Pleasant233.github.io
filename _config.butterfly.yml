@@ -32,7 +32,7 @@ menu:
 
 code_blocks:
   # Code block theme: darker / pale night / light / ocean / false
-  theme: light
+  theme: ocea  n
   macStyle: false
   # Code block height limit (unit: px)
   height_limit: false
@@ -49,8 +49,8 @@ code_blocks:
 # Formal:
 #   icon: link || the description || color
 social:
-  # fab fa-github: https://github.com/xxxxx || Github || '#24292e'
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
+  fab fa-github: https://github.com/Pleasant233 || Github || '#24292e'
+  fas fa-envelope: mailto:wangshuq1122@163.com || Email || '#4a7dbe'
 
 # --------------------------------------
 # Image Settings
