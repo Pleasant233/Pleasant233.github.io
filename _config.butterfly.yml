@@ -194,9 +194,9 @@ index_post_content:
 
 toc:
   post: true
-  page: false
+  page: true
   number: true
-  expand: false
+  expand: true
   # Only for post
   style_simple: false
   scroll_percent: true
@@ -409,7 +409,7 @@ rightside_item_order:
 
 anchor:
   # When you scroll, the URL will update according to header id.
-  auto_update: false
+  auto_update: true
   # Click the headline to scroll and update the anchor
   click_to_scroll: false
 
