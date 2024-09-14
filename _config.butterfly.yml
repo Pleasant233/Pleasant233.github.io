@@ -480,7 +480,7 @@ search:
   # Local Search
   local_search:
     # Preload the search data when the page loads.
-    preload: false
+    preload: true
     # Show top n results per article, show all results by setting to -1
     top_n_per_article: 1
     # Unescape html strings to the readable one.
@@ -1064,7 +1064,7 @@ CDN:
     # katex:
     # katex_copytex:
     # lazyload:
-    # local_search:
+    local_search: true
     # main:
     # main_css:
     # mathjax:
