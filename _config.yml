@@ -119,5 +119,5 @@ bangumis:
 search:
   path: search.xml
   field: post
-  fomat: html
+  format: html
   limit: 10000

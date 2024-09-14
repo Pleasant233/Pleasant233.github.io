@@ -17,6 +17,7 @@ nav:
   fixed: false
 
 menu:
+  Search: /search/|| fas fa-search
   Bangumis: /bangumis/ || fas fa-video
   Archives: /archives/|| fas fa-archive
   主页: / || fas fa-home
@@ -485,6 +486,7 @@ search:
     top_n_per_article: 1
     # Unescape html strings to the readable one.
     unescape: false
+    enable: true
     CDN:
 
   # Docsearch
