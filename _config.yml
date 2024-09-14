@@ -8,7 +8,7 @@ subtitle: ''
 description: ''
 keywords:
 author: Pleasant233
-language: cn
+language: zh-CN
 timezone: ''
 
 # URL
@@ -55,10 +55,10 @@ prismjs:
   line_number: true
   tab_replace: ''
 
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
+#Home: page setting
+#path: Root path for your blogs index page. (default = '')
+#per_page: Posts displayed per page. (0 = disable pagination)
+#order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
   per_page: 10
