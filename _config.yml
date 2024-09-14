@@ -118,7 +118,7 @@ bangumis:
   margin: 20px              # 封面图的偏移量微调
 
 search:
-  path: 'search.xml'
-  field: 'post'
-  format: 'html'
-  limit: '10000'
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
