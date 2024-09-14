@@ -59,14 +59,14 @@ social:
 favicon: /img/favicon.png
 
 avatar:
-  img: /img/butterfly-icon.png
-  effect: false
+  img: https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg
+  effect: true
 
 # Disable all banner images
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img: https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg
+default_top_img: 
 
 # The banner image of index page
 index_img: https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230801123321.jpg
