@@ -104,7 +104,7 @@ cover:
   archives_enable: true
   # When cover is not set, the default cover is displayed
   default_cover:
-    # - xxx.jpg
+    https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg
 
 # Replace Broken Images
 error_img:
