@@ -1065,7 +1065,7 @@ CDN:
     # katex:
     # katex_copytex:
     # lazyload:
-    #local_search
+    local_search: /js/search/local_search.js
     # main:
     # main_css:
     # mathjax:
