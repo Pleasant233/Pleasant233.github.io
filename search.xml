@@ -17,6 +17,19 @@
     
     
     <entry>
+      <title>计算机底层结构——1</title>
+      <link href="/2024/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%941/"/>
+      <url>/2024/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%941/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h1><ul><li><p>CPU是集成了&#x3D;&#x3D;控制器，运算器，寄存器，时钟&#x3D;&#x3D;的终端，它负责将我们的&#x3D;&#x3D;汇编语言&#x3D;&#x3D;解释为&#x3D;&#x3D;机器语言&#x3D;&#x3D;，从而供底层微处理器执行。他们通过&#x3D;&#x3D;总线&#x3D;&#x3D;相互连接，传递数据和指令。</p><ul><li><strong>寄存器</strong>：用于&#x3D;&#x3D;暂存指令&#x3D;&#x3D;，&#x3D;&#x3D;等对象&#x3D;&#x3D;。是内存的一种</li><li><strong>控制器</strong>：负责将内存上的指令数据&#x3D;&#x3D;读入寄存器&#x3D;&#x3D;并依据结果&#x3D;&#x3D;控制整个计算机&#x3D;&#x3D;，主要是输入输出时间的控制。</li><li><strong>运算器</strong>：负责运算寄存器中的数据，并把结果输出。</li><li><strong>时钟</strong>：发出CPU开始计时的时钟信号。（&#x3D;&#x3D;信号频率越高，CPU运行越快&#x3D;&#x3D;）</li></ul></li></ul><h1 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h1><ul><li><strong>内存</strong>指的是计算机的主存储器，负责存储指令和数据。&#x3D;&#x3D;每个字节都有一个地址编号&#x3D;&#x3D;，cpu通过它来读取指令与数据。</li></ul><h1 id="CPU与寄存器"><a href="#CPU与寄存器" class="headerlink" title="CPU与寄存器"></a>CPU与寄存器</h1><ul><li>CPU是寄存器的集合体，程序将寄存器作为对象来描述。</li><li><strong>汇编</strong>：指的是将汇编语言转化为机器语言。</li><li>寄存器种类多样：比如有&#x3D;&#x3D;程序计数器&#x3D;&#x3D;，&#x3D;&#x3D;标志寄存器&#x3D;&#x3D;，累加寄存器，&#x3D;&#x3D;基址寄存器&#x3D;&#x3D;，&#x3D;&#x3D;变址寄存器&#x3D;&#x3D;等。</li></ul><h1 id="寄存器与程序执行"><a href="#寄存器与程序执行" class="headerlink" title="寄存器与程序执行"></a>寄存器与程序执行</h1><ul><li><strong>寄存器</strong>中的<strong>程序计数器</strong>被赋予了分配程序执行顺序的能力。当硬盘中的文件被复制到内存后，程计会被&#x3D;&#x3D;设定为初始值0100&#x3D;&#x3D;，然后开始运行，&#x3D;&#x3D;每当&#x3D;&#x3D;CPU执行完一个指令，程计中的数值都会进行&#x3D;&#x3D;累加&#x3D;&#x3D;操作。CPU会按照程计的数值，从内存中读取命令并执行。</li><li><strong>循环，顺序，条件分支</strong>：这三种执行方式组成了程序的流程。<ul><li><strong>条件分支</strong>：如果在程序执行的过程中，需要有条件分支语句，那么在程计中，遇到这个语句，&#x3D;&#x3D;会将程计的数值设置为对应的地址数值&#x3D;&#x3D;，这个操作被称为&#x3D;&#x3D;jump&#x3D;&#x3D;。</li></ul></li></ul><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240417091436.png" alt="Pasted image 20240417091436"></p><ul><li><p><strong>&#x3D;&#x3D;标志&#x3D;&#x3D;寄存器</strong>：标志寄存器主要的作用为将累加寄存器中的结果&#x3D;&#x3D;状态&#x3D;&#x3D;进行记录，比如正负奇偶都会将其进行保存。所以在条件分支前，由其判断是否进行jump。标志寄存器&#x3D;&#x3D;前三个字节分别表示正0负三种状态&#x3D;&#x3D;。</p></li><li><p>标志寄存器的判断，实际上是对数值进行&#x3D;&#x3D;减法&#x3D;&#x3D;运算，通过结果设定状态。 ^3cacdc</p></li><li><p><strong>函数的调用</strong></p><ul><li>函数在调用时，在程计中会存在一个&#x3D;&#x3D;函数调用点&#x3D;&#x3D;。</li><li>call，return指令：call指令在函数入口地址设定到程计前，会把&#x3D;&#x3D;函数调用后&#x3D;&#x3D;要执行的地址存储在栈中。<br>  栈相关：[[内存与数据类型#栈]]<br>  函数处理完后，在通过函数出口来执行&#x3D;&#x3D;return&#x3D;&#x3D;指令，将栈中的地址设定到程计中。</li></ul></li><li><p>基址寄存器与变址寄存器：通过这两个寄存器，我们可以对主内存上特定的内存区域进行划分，从而实现类似数组的操作。数组相关：[[数组部分]] </p><ul><li>CPU会将基址寄存器和变址寄存器中的&#x3D;&#x3D;值之和&#x3D;&#x3D;视作实际要去查看的内存地址。变址寄存器相当于&#x3D;&#x3D;数组索引功能！&#x3D;&#x3D;</li></ul></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>计算机底层结构——0</title>
       <link href="/2024/09/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%940/"/>
       <url>/2024/09/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%940/</url>
