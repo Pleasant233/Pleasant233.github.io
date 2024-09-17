@@ -469,7 +469,7 @@ math:
 search:
   # Choose: algolia_search / local_search / docsearch
   # leave it empty if you don't need search
-  use: local_search
+  use: 'local_search'
   placeholder:
 
   # Algolia Search
@@ -479,13 +479,13 @@ search:
 
   # Local Search
   local_search:
+    enable: true
     # Preload the search data when the page loads.
-    preload: true
+    preload: false
     # Show top n results per article, show all results by setting to -1
     top_n_per_article: 1
     # Unescape html strings to the readable one.
     unescape: false
-    enable: true
     CDN:
 
   # Docsearch
@@ -1065,7 +1065,7 @@ CDN:
     # katex:
     # katex_copytex:
     # lazyload:
-    local_search: /js/search/local_search.js
+    # local_search
     # main:
     # main_css:
     # mathjax:
