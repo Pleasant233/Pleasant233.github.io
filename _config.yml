@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: 
+theme: butterfly
 plugins:
  - hexo-generator-search
 # Deployment
