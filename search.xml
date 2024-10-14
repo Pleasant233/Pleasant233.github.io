@@ -17,6 +17,25 @@
     
     
     <entry>
+      <title>Ue材质入门——0</title>
+      <link href="/2024/10/14/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%941/"/>
+      <url>/2024/10/14/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%941/</url>
+      
+        <content type="html"><![CDATA[<h1 id="材质编辑器"><a href="#材质编辑器" class="headerlink" title="材质编辑器"></a>材质编辑器</h1><ul><li>材质编辑界面主要由几部分组成，分别是材质图标，节点表，材质属性表，和各类操作面板：</li><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240928220416.png" alt="image.png"></li><li>类似于Blender的原理化BSDF节点，一开始就会存在的是右侧的输出节点</li><li>我们需要通过连线的方式，将节点连接到对应的输出端口上</li><li>在操作完成后，我们需要进行保存和应用，这些操作全部在上方的材质编辑器的操作面板上完成</li></ul><hr><h1 id="一些常用的材质节点"><a href="#一些常用的材质节点" class="headerlink" title="一些常用的材质节点"></a>一些常用的材质节点</h1><ul><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240928220757.png" alt="image.png"></li><li>以上是一些常用的基础材质节点，分别是：<ul><li>1+左键： 常量节点，用于输入一个常量</li><li>2+左键： 一个二维向量节点，用于输入一个二维向量</li><li>3+左键：一个三维向量节点，可以看到对应的RGB值，输入一个三维向量</li><li>M+左键：乘法，接受两个常量输入，输出他们相乘的结果</li><li>T+左键：输入一个材质，可以选择一个图像，输出RGB或其他选项</li></ul></li><li>还有更多的节点可以通过右键呼出搜索面板来进行搜索，与blender shift+a类似</li></ul><hr><h1 id="常用的输出端简介"><a href="#常用的输出端简介" class="headerlink" title="常用的输出端简介"></a>常用的输出端简介</h1><ul><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240928221546.png" alt="image.png"></li><li>根据我们选择着色模型的不同，也会有对应的不同的输出端口，但常用的基本一致，比如作为颜色信息的基础颜色，控制粗糙度的粗糙度端口。以下是逐项的介绍</li></ul><h2 id="基本颜色"><a href="#基本颜色" class="headerlink" title="基本颜色"></a>基本颜色</h2><ul><li>类似于UnityShader中的Color Tint，是作为基本的输出颜色存在的，决定了材质视觉上的呈现，往往直接可以连接一张Texture</li></ul><h2 id="金属感"><a href="#金属感" class="headerlink" title="金属感"></a>金属感</h2><ul><li>取值为0-1，所有的导电物体都应该具备的属性，可以让视觉上材质呈现出金属质感，类似于哑光质感。</li></ul><h2 id="高光度"><a href="#高光度" class="headerlink" title="高光度"></a>高光度</h2><ul><li>取值为0-1，类似于UnityShader中的_Gloss属性，用于控制高光的大小</li></ul><h2 id="粗糙度"><a href="#粗糙度" class="headerlink" title="粗糙度"></a>粗糙度</h2><ul><li>取值为0-1，用于控制物体的粗糙程度，可以接受Texture输入，类似于diffuse与Specular的混合程度，0即为100%Specular，1即为100%diffuse</li></ul><h2 id="各向异性"><a href="#各向异性" class="headerlink" title="各向异性"></a>各向异性</h2><ul><li>用于控制高光反射的形状，底层逻辑是一张采样的贴图</li></ul><h2 id="自发光颜色"><a href="#自发光颜色" class="headerlink" title="自发光颜色"></a>自发光颜色</h2><ul><li>用于控制物体自发光强度，数值越大发光强度越高，在UE中可以照亮周围的物体</li></ul><h2 id="不透明度"><a href="#不透明度" class="headerlink" title="不透明度"></a>不透明度</h2><ul><li>取值为0-1，用于控制物体可见性的数值，本质依然是不透明度混合的结果，这个数值就是可以对其的范围进行调节。可参考UnityShader中不透明效果的代码实现</li></ul><h2 id="不透明蒙版"><a href="#不透明蒙版" class="headerlink" title="不透明蒙版"></a>不透明蒙版</h2><ul><li>不透明蒙版可以做出类似PS中剪贴蒙版的作用，可以对有A通道的照片素材进行裁切，并且让场景中的面片跟随变化轮廓</li></ul><h2 id="法线与切线"><a href="#法线与切线" class="headerlink" title="法线与切线"></a>法线与切线</h2><ul><li>经常用作制作物体表面凹凸质感，在UnityShader中，可以在切线空间下计算法线贴图也可以在世界空间计算，美术更喜欢前者，因为可以清晰判别模型的各个视觉方向。</li></ul><h2 id="全局位置偏移"><a href="#全局位置偏移" class="headerlink" title="全局位置偏移"></a>全局位置偏移</h2><ul><li>移动模型位置，更多用于动态效果的创建</li></ul><h2 id="次表面颜色"><a href="#次表面颜色" class="headerlink" title="次表面颜色"></a>次表面颜色</h2><ul><li>需要配合次表面着色模型开启，开启后可以实现透光效果</li></ul><h2 id="折射与像素深度偏移"><a href="#折射与像素深度偏移" class="headerlink" title="折射与像素深度偏移"></a>折射与像素深度偏移</h2><ul><li>前者多为玻璃材质所需，后者则是软化模型交界处质感</li></ul><hr><h1 id="渲染模式与着色模型"><a href="#渲染模式与着色模型" class="headerlink" title="渲染模式与着色模型"></a>渲染模式与着色模型</h1><ul><li><p>在UE中一共有六种材质域，数种着色模型：</p></li><li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20240928223722.png" alt="image.png"></p></li><li><p>许多与Unity共同的特点，只不过有更好的封装进而有更便捷的实现。例如混合模式就是UnityShader中的Blend关键字，可以很容易的进行混合模式的开启，从而渲染半透明等材质</p></li><li><p>同样，着色模型也为我们提供了实现某些渲染效果更轻松的实现，这些都是UE为我们进行的优化。</p></li></ul><hr><h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><ul><li>这一节，我们初步认识了UE的材质编辑界面，简单来说，就是利用可视化节点的方式代替code编辑从而便捷的实现效果，但请记住，本身仍然是一个个函数实现，因此结合Shader代码的学习必不可少！</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ue材质入门 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>计算机底层结构——2</title>
       <link href="/2024/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%942/"/>
       <url>/2024/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E2%80%94%E2%80%942/</url>
