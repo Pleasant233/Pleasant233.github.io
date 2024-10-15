@@ -1,5 +1,5 @@
 ---
-title: 'Ue材质入门——0'
+title: 'Ue材质入门——1'
 date: '2024-10-14'
 description: 材质编辑器通过节点连接实现材质效果，支持多种输出端口与渲染模式。
 top_img: https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png
