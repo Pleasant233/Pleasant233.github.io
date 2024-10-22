@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Ue材质入门——5 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="虚幻引擎中的渐变实现及其原理概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ue材质入门——5">
+<meta property="og:url" content="http://example.com/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="虚幻引擎中的渐变实现及其原理概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png">
+<meta property="article:published_time" content="2024-10-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-22T09:50:44.587Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ue材质入门——5',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-22 09:50:44'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-music"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-video"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">Ue材质入门——5</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-music"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-video"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Ue材质入门——5</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-22T00:00:00.000Z" title="发表于 2024-10-22 00:00:00">2024-10-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-22T09:50:44.587Z" title="更新于 2024-10-22 09:50:44">2024-10-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8/">Ue材质入门</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="材质中的渐变"><a href="#材质中的渐变" class="headerlink" title="材质中的渐变"></a>材质中的渐变</h1><ul>
+<li>常用的渐变的分类<ul>
+<li>方形渐变</li>
+<li>中心渐变</li>
+<li>角度渐变</li>
+</ul>
+</li>
+<li>渐变与UV坐标的关系<ul>
+<li>在Ue以及其它三维软件中，UV坐标的直观显示是一个由白到黑的颜色渐变，随着数值变化而渐变，因此这种显示方式决定了，我们可以利用它来进行渐变效果的模拟</li>
+</ul>
+</li>
+</ul>
+<h1 id="方形渐变"><a href="#方形渐变" class="headerlink" title="方形渐变"></a>方形渐变</h1><ul>
+<li><p>方形渐变的拆解：</p>
+<ul>
+<li>方形渐变本质上，通过观察我们可以发现，实际上它就是两个方向渐变的叠加：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E6%9C%AA%E6%A0%87%E9%A2%98-1.png" alt="未标题-1.png"></li>
+<li>实际上我们可以通过从水平方向和竖直方向分别拆解这个渐变，它是由白（1）到黑（0）再到白（1）的过程，那么我们只需要让它的数值变化符合这个规律，并且在最后取其中的最小值即可完成上图效果的实现：</li>
+</ul>
+</li>
+<li><p>详细实现过程（UE）</p>
+</li>
+<li><p>首先，我们需要进行的是第一部，UV坐标的分解和处理，当然，我们同样可以对二维数据同时处理，我们先考虑第二种：</p>
+</li>
+<li><p>创建UV节点（U+左键）并且创建一个Mask掩码节点，用于分离UV常量：</p>
+</li>
+<li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008100813.png" alt="image.png"></p>
+</li>
+<li><p>随后，我们根据拆解的分析，利用subtract节点，将数值范围调整为：-0.5,0,0.5，之后，我们利用绝对值节点ABS将数值取正，调整为0.5,0,0.5,再乘2，即可达成1,0,1的数值变化：</p>
+</li>
+<li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008101232.png" alt="image.png"></p>
+</li>
+<li><p>但这时你若直接输出，则会发现它与我们的期待正好相反，我们所需要的是0，1，0，但现在是1,0,1，不用担心，我们只需将其取反，利用取反节点onesubx（1-x）即可将数值变化变为0,1,0：</p>
+</li>
+<li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008101422.png" alt="image.png"></p>
+</li>
+<li><p>数值满足了，但此时若直接输出会发现，依然不是我们所需要的效果，这是为何呢？</p>
+</li>
+<li><p>原来实际上我们同时处理UV的代价就是它们是混合进行的，所以若想达到效果，就需要将混合去除，</p>
+</li>
+<li><p>我们同样利用掩码Mask节点，分离UV方向，然后做最后一步，那么就是按我们的需求混合，我们希望保留下黑色部分，黑色部分是0，也就是最小值min，因此我们需要利用最小值节点min，以此来获得最终图像的效果：</p>
+</li>
+<li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008101750.png" alt="image.png"></p>
+</li>
+<li><p>这样我们的方形渐变就大功告成了！</p>
+</li>
+<li><p><strong>一些思考</strong>：</p>
+<ul>
+<li>既然它是一个效果材质，那么我们理应提供调节效果的手段，我们在目前先提供一个控制范围的参数，若想控制渐变的区域，我们可以利用之前学过的Power节点，让整体数值趋于0，这样我们就可以将渐变范围调整了：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008102405.png" alt="image.png"></li>
+<li>其他的调整方式，也欢迎大家实践！</li>
+</ul>
+</li>
+</ul>
+<h1 id="中心渐变"><a href="#中心渐变" class="headerlink" title="中心渐变"></a>中心渐变</h1><ul>
+<li>下面我们再来看一个类型，中心渐变</li>
+<li>中心渐变的拆解：<ul>
+<li>中心渐变是一个圆形，从中心向外变化，内部为0，最外部为1，常常用来作为相机晕影的效果出现</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008102703.png" alt="image.png"></li>
+<li>实际上，它是一个特殊的方形渐变，它是365°的方向上变化的方形渐变，正如圆本身是一个很多边的多边形一样。因此，我们可以用类似的思考方式去模拟：</li>
+</ul>
+</li>
+<li>详细实现过程（UE）：</li>
+<li>首先，同样我们需要创建一个UV节点，但与上面条件不同的是，我们需要利用另一个节点来完成对全部方向上渐变的计算，我们使用Distance节点，它可以测量输入值与一个接收的数值的距离，我们将其设定为0.5,0.5,也就是正中心的UV坐标，我们就可以的到一个很棒的效果，一个看起来不错的圆形渐变：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008103405.png" alt="image.png"></li>
+<li>但仔细观察你会发现，它有些暗，是的，它的变化范围并不是0-1而是0-0.75，这是为什么呢，根据简单的勾股定理计算，实际上斜边并没有到1，因此为了让它的范围正确，我们需要进行一系列调整，首先，利用乘法节点，将其范围增大到1以上，接着在利用subtract节点规范它的范围到0-1之间：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008103621.png" alt="image.png"></li>
+<li>我们可以肉眼直观地看到它的变化，接下来，我们依然要解决它数值相反的问题，所以使用1-x节点，调整它的数值范围，最后得到正确的效果。</li>
+<li>我们可以利用我们得到的效果，制作一个晕影图片！</li>
+<li>导入一张外部贴图，连接到一个新建的乘法节点上，并将1-x节点的输出连到这个乘法节点上：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008104047.png" alt="image.png"></li>
+<li><strong>同样的</strong>，我们也可以对其增加一些外部数据调整的节点，让这个材质更加具备一个材质应该有的属性！</li>
+</ul>
+<h1 id="角度渐变"><a href="#角度渐变" class="headerlink" title="角度渐变"></a>角度渐变</h1><ul>
+<li>接下来是一个小难点，角度渐变</li>
+<li>角度渐变的分析拆解：<ul>
+<li>角度渐变实际上是根据角度的变化，渐变的颜色逐渐变化，也就是在一个圆（2π）的变化范围内，数据从0-1变化的过程，本质上与前两个渐变没有区别，难点在于它涉及到了一定的三角函数运算：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008104626.png" alt="image.png"></li>
+<li>不过我们依然可以对其进行分析，只要细心拆解，就不会有无法实现的效果，本篇略长，希望大家耐心学习，争取有所收获</li>
+</ul>
+</li>
+<li>角度渐变的实现(UE):</li>
+<li>首先，万变不离其宗，我们依然创建UV节点，同时分离UV方向，当然你也可以尝试不分离，并思考其中的关系，我们这里使用掩码Mask节点来分离UV：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008105251.png" alt="image.png"></li>
+<li>不同的是，我们需要对UV坐标进行数值上的调整，之前的调整方式有些麻烦了，我们可以通过一个高级节点来简化这个过程，但本质依旧还是一样的，只不过是一个上层的封装罢了：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008105422.png" alt="image.png"></li>
+<li>这个节点可以接受四个数值，分别是原始的minMax值，和想要转换的max和min值，就可以将其变为对应数值范围的数据，随后，我们将其分别输出到一个关键节点arctan节点，它是我们实现这个效果的关键，从数学角度分析如下图：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008115714.png" alt="image.png"></li>
+<li>因此，我们得到的范围为从-π&#x2F;4到π&#x2F;4，也就是能看到的变化范围为45°,但实际上，ue中颜色变化范围是0-1，而45°还未达到上限，因此实际上我们看见的结果并非45度，而我们可以通过除法变化该图像范围</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241008141113.png" alt="image.png"></li>
+<li>该图实际显示的其实是-π到π，但实际上是0到2π所以如果我们将整个结果同时除以2π，最后我们将得到一个0-1范围的变化，而如果我们除以π，则是-1到0，0到1的变化，这里ue改变了原本数学的值域范围将它变为了-π到π的显示，而实际数值计算中却有所不同</li>
+</ul>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/">http://example.com/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/10/22/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a><a class="pagination-related" href="/2024/10/17/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%944/" title="Ue材质入门——4"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Ue材质入门——4</div></div><div class="info-2"><div class="info-item-1">虚幻引擎中的数据纬度控制以及运算节点</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8%E4%B8%AD%E7%9A%84%E6%B8%90%E5%8F%98"><span class="toc-number">1.</span> <span class="toc-text">材质中的渐变</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E5%BD%A2%E6%B8%90%E5%8F%98"><span class="toc-number">2.</span> <span class="toc-text">方形渐变</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E6%B8%90%E5%8F%98"><span class="toc-number">3.</span> <span class="toc-text">中心渐变</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%92%E5%BA%A6%E6%B8%90%E5%8F%98"><span class="toc-number">4.</span> <span class="toc-text">角度渐变</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/22/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2024/10/22/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2024-10-22T09:50:44.587Z" title="发表于 2024-10-22 09:50:44">2024-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/" title="Ue材质入门——5"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——5"/></a><div class="content"><a class="title" href="/2024/10/22/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%945/" title="Ue材质入门——5">Ue材质入门——5</a><time datetime="2024-10-22T00:00:00.000Z" title="发表于 2024-10-22 00:00:00">2024-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/17/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%944/" title="Ue材质入门——4"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——4"/></a><div class="content"><a class="title" href="/2024/10/17/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%944/" title="Ue材质入门——4">Ue材质入门——4</a><time datetime="2024-10-17T00:00:00.000Z" title="发表于 2024-10-17 00:00:00">2024-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/16/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%943/" title="Ue材质入门——3"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——3"/></a><div class="content"><a class="title" href="/2024/10/16/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%943/" title="Ue材质入门——3">Ue材质入门——3</a><time datetime="2024-10-16T00:00:00.000Z" title="发表于 2024-10-16 00:00:00">2024-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%942/" title="Ue材质入门——2"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——2"/></a><div class="content"><a class="title" href="/2024/10/15/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%942/" title="Ue材质入门——2">Ue材质入门——2</a><time datetime="2024-10-15T00:00:00.000Z" title="发表于 2024-10-15 00:00:00">2024-10-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
