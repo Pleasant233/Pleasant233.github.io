@@ -17,6 +17,25 @@
     
     
     <entry>
+      <title>入门图形学0——图形学引入</title>
+      <link href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/"/>
+      <url>/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0-1-图形学能做些什么？"><a href="#0-1-图形学能做些什么？" class="headerlink" title="0.1 图形学能做些什么？"></a>0.1 图形学能做些什么？</h1><ul><li><strong>游戏方面</strong>：<ul><li><p>真实的渲染画面</p></li><li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Forza%20Horizon%204%20Screenshot%202024.10.11%20-%2017.41.24.95.png" alt="Forza Horizon 4 Screenshot 2024.10.11 - 17.41.24.95.png"><br>                      <code>游戏：极限竞速：地平线四</code></p></li><li><p>风格化的渲染模式</p></li><li><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022101238.png" alt="image.png"><br>                      <code>游戏：无主之地3</code></p></li></ul></li></ul><hr><ul><li><strong>特效电影方面</strong>：<ul><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022101412.png" alt="image.png"><br>                     <code>电影：黑客帝国</code></li></ul></li><li><strong>动画方面</strong>：<ul><li>真实系动画</li><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022101636.png" alt="image.png"><br>                      <code>动画电影：疯狂动物城</code></li><li>三渲二风格动画</li><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022101847.png" alt="image.png"><br>                      <code>动画短片：星穹铁道角色PV——飞霄【君莫笑】</code></li></ul></li></ul><hr><ul><li>设计与效果模拟<ul><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022102238.png" alt="image.png"><br>                     <code>地形编辑软件：GeoGen</code></li></ul></li></ul><hr><ul><li>综上所属，实际上图形学本质上是属于人机交互与视觉传达的基础学科，它是<strong>物理与数学</strong>相结合的产物，用于描绘出现实世界的光影变化外貌轮廓。</li></ul><hr><h1 id="0-2-什么是渲染"><a href="#0-2-什么是渲染" class="headerlink" title="0.2 什么是渲染"></a>0.2 什么是渲染</h1><ul><li>渲染是将场景信息通过一系列操作（渲染流程）作为帧或者图像呈现在屏幕上的过程。</li><li>负责渲染帧或图像的部分被称为渲染引擎，渲染引擎如Unity，Ue等将场景的数据通过渲染流程呈现在屏幕上。</li></ul><hr><ul><li>学习图形学需要具备什么？<ul><li>需要具备一颗会<strong>观察生活，追求美好画面</strong>的审美的心</li><li>需要具备一个<strong>严谨分析，善于思考剖析原理</strong>的脑</li></ul></li></ul><hr><h1 id="0-3-究竟学习什么？"><a href="#0-3-究竟学习什么？" class="headerlink" title="0.3 究竟学习什么？"></a>0.3 究竟学习什么？</h1><ul><li>总体而言：学习基础，学习方法，学习思维模式，主要入门的是离线渲染中的光栅化部分</li><li>总体时间段：<ul><li><strong>基础课和入门课结束之后：11月中旬到春节前</strong></li><li>2025年寒假以前（除考试周外）：每周六下午一节</li><li>2025年寒假到春节前一周：每周两到三节</li></ul></li><li>分享形式：每周由部长与副部长轮流交替直播分享，有录屏文件</li><li>课程所需：电脑（不要求配置），Processing，VisualStudio，Photoshop<ul><li>提供课程录播文件（上传部长Bilibili），提供原版教案（上传部长博客网站），提供课程所需素材（包括但不限于代码，资产，软件等）</li></ul></li></ul><h1 id="0-4-具体阶段："><a href="#0-4-具体阶段：" class="headerlink" title="0.4 具体阶段："></a>0.4 具体阶段：</h1><ul><li>1.<strong>基础入门概念</strong>：<ul><li>画布，颜色模型，颜色深度和颜色表示等</li><li>数学：线性代数</li><li>计算机硬件</li><li>课程安排：两到三节课</li></ul></li><li>2.<strong>渲染管线综述</strong>：<ul><li>渲染管线的大致划分</li><li>各个阶段的详解</li><li>课程安排：一到两节课</li></ul></li><li>3.<strong>光栅化阶段1：变换与几何部分</strong><ul><li>聚焦单个片元： </li><li>如何绘制直线，三角形——配合代码编写程序</li><li>如何填充一个三角形？——配合代码编写程序</li><li>三角形的变换与着色</li><li>课程安排：四到五节课</li></ul></li><li><strong>4.光栅化阶段2：着色与处理</strong>  配合DCC软件<ul><li>介绍基础概念如着色模型处理技术等</li><li>介绍材质</li><li>介绍UV贴图等概念</li><li>课程安排：三到四节课</li></ul></li><li>综上，入门图形学课程深入浅出，为各位进行日后的创作与研究奠定理论基础，正所谓千里之行始于足下，我们一起进步！</li></ul><hr><p><strong>深入学习，找到自己感兴趣的方向!</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 入门图形学 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ue材质入门——7</title>
       <link href="/2024/10/26/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%947/"/>
       <url>/2024/10/26/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%947/</url>
