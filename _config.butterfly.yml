@@ -17,14 +17,9 @@ nav:
   fixed: false
 
 menu:
-  Bangumis: /bangumis/ || fas fa-video
+  Animations: /bangumis/ || fas fa-video
   Archives: /archives/|| fas fa-archive
   主页: / || fas fa-home
-  标签: /tags/||fas fa-tags
-  分类: /categories/||fas fa-folder-open
-  链接||fas fa-list:
-    友情链接: /link/ || fas fa-music
-    关于: /about/ || fas fa-video
 
 # --------------------------------------
 # Code Blocks Settings
