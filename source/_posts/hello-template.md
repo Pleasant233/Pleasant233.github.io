@@ -62,4 +62,4 @@ sticky: 1
  * 1.hexo官网：https://hexo.io/zh-cn/
  * 2.b站up主：方欲遣兵北逐胡的视频：【基于Hexo搭建本地博客并部署到云服务器教程】 https://www.bilibili.com/video/BV1qU4y1K7Hk/?share_source=copy_web&vd_source=18d60239a339ad21d3b3f050742622f4
  * 3.b站up主：吉吉学长的视频：【【Hexo | 03】创建属于你的追番列表】 https://www.bilibili.com/video/BV1Bu4y1d7YF/?share_source=copy_web&vd_source=18d60239a339ad21d3b3f050742622f4
- * 全部为开源项目，不承担任何责任！
+ * 全部为开源项目，不承担任何责任！！
