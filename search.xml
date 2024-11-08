@@ -17,6 +17,25 @@
     
     
     <entry>
+      <title>Ue材质入门——8</title>
+      <link href="/2024/11/08/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%948/"/>
+      <url>/2024/11/08/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%948/</url>
+      
+        <content type="html"><![CDATA[<h1 id="数据运算"><a href="#数据运算" class="headerlink" title="数据运算"></a>数据运算</h1><ul><li>数据逻辑节点：Ue中常用的数据选择节点有：switch，if节点等，我们可以简单利用这些节点对数据进行简单的判断。</li></ul><h1 id="switch节点"><a href="#switch节点" class="headerlink" title="switch节点"></a>switch节点</h1><ul><li>我们可以利用ue中的switch节点进行一些数据运算的判断，可以输入两个数据以及一个判断数据，来在外部创建选项进行数据的切换。<ul><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241017131843.png" alt="image.png"></li></ul></li></ul><h1 id="if-节点"><a href="#if-节点" class="headerlink" title="if 节点"></a>if 节点</h1><ul><li>我们可以使用if节点进行一些简单的逻辑判断，比如a是否大于b或相反，这些在进行一些需要判断范围或者蒙版遮罩比较适用。</li><li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241017132235.png" alt="image.png"></li></ul><hr><h1 id="常用的数学运算节点"><a href="#常用的数学运算节点" class="headerlink" title="常用的数学运算节点"></a>常用的数学运算节点</h1><p><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241017132429.png" alt="image.png"></p><ul><li>以上是Ue中常用的三个数学计算节点，分别为点积，叉积，以及归一化运算，其相关的数学基础比较容易，在此就不赘述，各位谨记，实际上颜色也是数据，是向量组成的矩阵，对其进行操作就是进行向量的运算。</li></ul><h2 id="点积运算"><a href="#点积运算" class="headerlink" title="点积运算"></a>点积运算</h2><ul><li>点积运算本质是判断两个向量的方向关系，方向不同点积的结果也不同。这里给出基本的点积运算逻辑：<br>               A · B &#x3D; |A|B|cos(a,b)  </li><li>从公式可以看出，得到的结果存在一个ab的夹角的余弦值，我们可以利用这个值进行一些条件判断或者效果制作。</li></ul><h2 id="叉积运算"><a href="#叉积运算" class="headerlink" title="叉积运算"></a>叉积运算</h2><ul><li>差集运算本质是已知两个向量求第三个与这两个向量所在平面垂直的向量方向，因此我们可以利用这两个向量得出第三个向量的方向，在判断一点与三角形位置关系的时候经常使用，以下是叉积的运算逻辑：<br>               A×B &#x3D; |A||B|sin(a,b)</li><li>从公式可以看出实际上与它们垂直的第三个向量的长度在数值上等于以a，b，夹角为θ组成的平行四边形的面积。<br>               |c|&#x3D;|a×b|&#x3D;|a||b|sin&lt;a，b&gt;</li></ul><h2 id="归一化运算"><a href="#归一化运算" class="headerlink" title="归一化运算"></a>归一化运算</h2><ul><li>归一化往往是在简化运算方面进行的，有些时候我们只需要向量的方向信息而忽略它的位置信息，这时候我们就可以使用归一化操作，忽略它的具体位置信息而保留它的方向，让其模长为1。以下是归一化运算逻辑<br>                     B&#x2F;|B|</li><li>去除其长度信息，只保留其方向信息</li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ue材质入门 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>入门图形学1——基本概念</title>
       <link href="/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"/>
       <url>/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
