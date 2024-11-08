@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>入门图形学1——基本概念 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学习前需要具备的基本概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门图形学1——基本概念">
+<meta property="og:url" content="http://example.com/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="学习前需要具备的基本概念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png">
+<meta property="article:published_time" content="2024-11-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-08T08:56:10.323Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '入门图形学1——基本概念',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%88%86%E4%BA%AB%E8%AF%BE%E5%A4%B4%E5%9B%BE.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">入门图形学1——基本概念</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">入门图形学1——基本概念</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-08T00:00:00.000Z" title="发表于 2024-11-08 00:00:00">2024-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-08T08:56:10.323Z" title="更新于 2024-11-08 08:56:10">2024-11-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A6/">入门图形学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="1-1画布与坐标系"><a href="#1-1画布与坐标系" class="headerlink" title="1.1画布与坐标系"></a>1.1画布与坐标系</h1><h2 id="1-1-1画布的定义"><a href="#1-1-1画布的定义" class="headerlink" title="1.1.1画布的定义"></a>1.1.1画布的定义</h2><ul>
+<li>画布实际上可以理解为显示到屏幕上的画面，是一个像素矩阵，无论是3D场景抑或是2D场景，最后都要通过画布来呈现</li>
+<li>画布可以使用一个函数（会在编写着色器时遇到它）它接受一个坐标值，并绘制一个颜色。</li>
+</ul>
+<hr>
+<h2 id="1-1-2-坐标系"><a href="#1-1-2-坐标系" class="headerlink" title="1.1.2 坐标系"></a>1.1.2 坐标系</h2><ul>
+<li>坐标系量化排布数值的方式。我们这里讨论的主要是屏幕坐标系，在不同的平台坐标系的定义不一样，但它们都应该具备几个基本特征：<ul>
+<li>坐标轴</li>
+<li>原点</li>
+<li>轴距</li>
+</ul>
+</li>
+<li>比如在OpenGL中坐标是这样的，y轴正方向向上</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022145259.png" alt="image.png"><br>                      <code>1.1.2.1 OpenGL坐标系</code></li>
+</ul>
+<hr>
+<ul>
+<li>而在DirectX中，坐标轴是这样的：<br>*<img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022145422.png" alt="image.png"><br>                      <code>1.1.2.2 DirectX坐标系</code></li>
+<li>我们可以通过变化轴来进行坐标系的变化。</li>
+</ul>
+<hr>
+<h2 id="1-1-3-左右手坐标系"><a href="#1-1-3-左右手坐标系" class="headerlink" title="1.1.3 左右手坐标系"></a>1.1.3 左右手坐标系</h2><ul>
+<li>在计算机软件中，我们常常会接触到判断物体坐标系的情况，最常用的两个坐标系分别是左手坐标系和右手坐标系，它们最大的不同就是它们所对应的x轴方向不同</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241025104607.png" alt="image.png"><br>          <code>1.1.2.3 左右手坐标系</code></li>
+</ul>
+<hr>
+<ul>
+<li>区别两个坐标系的方式是考虑他们的旋向性，两个坐标系无法通过旋转重合。</li>
+<li>如Unity使用的就是左手坐标系，它的特点是x轴向右。我们可以通过左右手法则来判断左右手坐标系</li>
+<li>左手坐标系下旋转方向是顺时针的，而右手法则下旋转方向是逆时针的，对应的大拇指的方向也是垂直方向同样是不一样的</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241025104937.png" alt="image.png"><br>          <code>1.1.2.4 左右手法则</code></li>
+</ul>
+<hr>
+<h1 id="1-2-色彩与色彩空间"><a href="#1-2-色彩与色彩空间" class="headerlink" title="1.2 色彩与色彩空间"></a>1.2 色彩与色彩空间</h1><h2 id="1-2-1色彩的感性理解"><a href="#1-2-1色彩的感性理解" class="headerlink" title="1.2.1色彩的感性理解"></a>1.2.1色彩的感性理解</h2><ul>
+<li>色彩的<strong>冷暖，色彩的对比度，色彩的饱和度，色彩的色相</strong></li>
+</ul>
+<h2 id="1-2-2色彩的理性理解"><a href="#1-2-2色彩的理性理解" class="headerlink" title="1.2.2色彩的理性理解"></a>1.2.2色彩的理性理解</h2><ul>
+<li>由<strong>光源产生的光线</strong>，进入人眼，在人眼细胞产生一系列化学反应，信号传入大脑，最终形成感知</li>
+</ul>
+<hr>
+<h2 id="1-2-3光源的定义"><a href="#1-2-3光源的定义" class="headerlink" title="1.2.3光源的定义"></a>1.2.3光源的定义</h2><ul>
+<li>**发出光线的物体</li>
+<li>光的波长：<ul>
+<li>理论上是无穷大的，人眼的<strong>可见光范围</strong>决定了我们对其颜色的定义。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022120443.png" alt="image.png"><br>                       <code> 1.2.3.1 光波总览</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>如何去<strong>定量</strong>描述光？<ul>
+<li>光实际上是<strong>波</strong>，波形可以叠加，我们通过<strong>功率单位</strong>（流明，瓦数等）描述。</li>
+<li>分光光度计：通过分光后对波长进行感知，最终得知光能量集中在550nm区域（图中绿色区域）</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022120750.png" alt="image.png"><br>                      <code>1.2.3.2 人眼可见光范围</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-2-4-光传播的方式"><a href="#1-2-4-光传播的方式" class="headerlink" title="1.2.4 光传播的方式"></a>1.2.4 光传播的方式</h2><ul>
+<li>基本的传播方式：<ul>
+<li><strong>直射，折射，反射，</strong> 光线追踪方式</li>
+</ul>
+</li>
+<li>反射过程中，光的<strong>能量会减少，因为材质吸收了一定能量的光</strong>而吸收了某种颜色的光就代表人眼<strong>无法再看到这部分光。</strong><br>因此我们能看到的就是它们<strong>补集</strong>，也就是反射出的光</li>
+</ul>
+<hr>
+<h2 id="1-2-5-光源的接受者"><a href="#1-2-5-光源的接受者" class="headerlink" title="1.2.5 光源的接受者"></a>1.2.5 光源的接受者</h2><ul>
+<li>光源的接受者实际上是摄像机视图，但最终呈现给的是人眼</li>
+<li>关于人眼的HDR：人眼可以调节自动曝光，分辨出高亮度的区域中不同亮度层次的区域。</li>
+<li>人眼感知色彩的细胞主要分为杆状细胞和锥状细胞<ul>
+<li>前者主要负责对亮度的感知</li>
+<li>后者负责感知色彩</li>
+</ul>
+</li>
+<li>我们主要关注感知色彩的锥状细胞，它又能分为分别感知红绿蓝三种颜色的SML三种细胞</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022122148.png" alt="image.png"><br>                      <code>1.2.5 锥状细胞感受管线波长图</code></li>
+<li>很明显他们感知的光线光波长度不一样。</li>
+</ul>
+<hr>
+<h2 id="1-2-6-色彩的猜想"><a href="#1-2-6-色彩的猜想" class="headerlink" title="1.2.6 色彩的猜想"></a>1.2.6 色彩的猜想</h2><ul>
+<li><p>人们猜想人的眼睛有数百种感光细胞感受不同颜色</p>
+</li>
+<li><p>人们猜想人有三种细胞分别感受红绿蓝三种颜色</p>
+</li>
+<li><p>人们猜想人分别有感知黑白，红绿，黄蓝这几种细胞</p>
+</li>
+<li><p>后来第二种和第三种分别演变为了两种色彩模型</p>
+</li>
+</ul>
+<hr>
+<h2 id="1-2-7-艺术家们的Munsell色彩系统"><a href="#1-2-7-艺术家们的Munsell色彩系统" class="headerlink" title="1.2.7 艺术家们的Munsell色彩系统"></a>1.2.7 艺术家们的Munsell色彩系统</h2><ul>
+<li>来自于美国艺术家AlbertHenryMunsell</li>
+<li>是通过色卡描述色彩，旋转轴是色相，垂直是亮度，由内到外是饱和度</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022122917.png" alt="image.png"><br>                      <code>1.2.7 Munsell 颜色描述系统</code></li>
+</ul>
+<hr>
+<ul>
+<li>更多是<strong>基于经验而不是物理</strong>，不过这种HSL（色相饱和亮度）的色彩方法仍然被大多数艺术家所接受，至今活跃于各大DCC软件平台中。（如Photoshop）</li>
+</ul>
+<hr>
+<h2 id="1-2-8-科学家们的-RGB-CSS系统"><a href="#1-2-8-科学家们的-RGB-CSS系统" class="headerlink" title="1.2.8 科学家们的 RGB CSS系统"></a>1.2.8 科学家们的 RGB CSS系统</h2><ul>
+<li>即RGB Color Specification System（RGB色彩规格系统）</li>
+<li>来自于CIE在1931年建立的色彩系统，从物理的方式客观描述量化色彩 </li>
+<li>通过三原色打光进行观察对比，对于不同的光得到不同的参数值，最后的的结果如下：</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022133857.png" alt="image.png"><br>                      <code>1.2.8 RGB CSS 描述系统波形图</code></li>
+</ul>
+<hr>
+<ul>
+<li>图中表示方式并不规范，因此科学家又对其进行了归一化操作。这个操作在图形学中很常见，主要是为了更加规范的量化数值，便于表述和调节，这里我们使用将rgb三个量相加并且分别被rgb的量所除去的方式建立这个归一化算式：<ul>
+<li><code>R&#39; = R/RGB,   G&#39;= G/RGB,   B&#39; = B/RGB</code></li>
+</ul>
+</li>
+<li>至此，利用此算式和其变式，我们就可以用其中两个已知数计算另外一个数的值。</li>
+</ul>
+<hr>
+<h2 id="1-2-9-基础的色域概念"><a href="#1-2-9-基础的色域概念" class="headerlink" title="1.2.9 基础的色域概念"></a>1.2.9 基础的色域概念</h2><ul>
+<li>在此基础上，我们将r与g分别作为xy轴，就可以创建一个二维色彩空间，来描述一个颜色r与g部分的组成，前文我们可知，任何一个颜色都是可以由两个参数得出的，因此b就可以通过r与g计算得到。<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022134614.png" alt="image.png"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>XYZ色彩空间<ul>
+<li>在上述二维色彩空间或称色域的基础上，为了避免出现负数，科学家又进行了一次迭代，这是用数学的方式做的一次更新，避免了<strong>负数的产生</strong>，但本身目的就是为了<strong>简化计算</strong></li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022135023.png" alt="image.png"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>转换的方式：<ul>
+<li>XYZ转换使用了矩阵进行转化计算，矩阵相关运算我们在下一节进行，这里只需要知道，矩阵起到了转换空间坐标的作用：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022135351.png" alt="image.png"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>为了便于计算，人们同样对该矩阵进行了归一化操作：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022135429.png" alt="image.png"><br>          <code>XYZ转换矩阵进行归一化操作</code></li>
+</ul>
+<hr>
+<h2 id="1-2-10-色域与Yxy色彩空间"><a href="#1-2-10-色域与Yxy色彩空间" class="headerlink" title="1.2.10 色域与Yxy色彩空间"></a>1.2.10 色域与Yxy色彩空间</h2><ul>
+<li>经过1.2.9的演变最终形成了色域马蹄图：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022135719.png" alt="image.png"><br>               <code>色域马蹄图</code></li>
+</ul>
+<hr>
+<ul>
+<li>但这只是一张二维图片，虽然是人眼可见的色域范围，但并没有亮度表示，因此又将Y轴单独拿出来与xy组成了Yxy色彩空间，这个色彩空间中的Y轴是亮度：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022140002.png" alt="image.png"><br>                  <code>Yxy色彩空间</code></li>
+</ul>
+<hr>
+<h2 id="1-2-11-色彩空间的定义"><a href="#1-2-11-色彩空间的定义" class="headerlink" title="1.2.11 色彩空间的定义"></a>1.2.11 色彩空间的定义</h2><ul>
+<li>一个色彩空间所具备的基础<ul>
+<li>色域（三个基色坐标，由此形成三角形）</li>
+<li>伽马（对三角形进行切分,一种采样方式）</li>
+<li>白点（色彩中心）</li>
+</ul>
+</li>
+<li>Gamma值<ul>
+<li>简单来说就是色域切分的片段，主要分为<ul>
+<li>均匀切割（Gamma &#x3D; 1）便于计算</li>
+<li>非均匀切割（Gamma !&#x3D; 1）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022140752.png" alt="image.png"></li>
+<li>对暗部描述更多，对亮部描述更少。</li>
+</ul>
+<hr>
+<h2 id="1-2-12-sRGB空间"><a href="#1-2-12-sRGB空间" class="headerlink" title="1.2.12 sRGB空间"></a>1.2.12 sRGB空间</h2><ul>
+<li>sRGB空间是一种常用的色彩空间，它的gamma值为2.2，由内而外切线越来越粗</li>
+<li>为何要用gamma？<ul>
+<li>便于储存（远古）</li>
+<li>人对亮部信息感受少对暗部感受多</li>
+</ul>
+</li>
+<li>目前大部分游戏都会使用线性空间。任何色彩空间都可以是线性的linear，但linear本身不是一个色彩空间，它只是一个伽马值。</li>
+</ul>
+<hr>
+<h2 id="1-2-13-颜色的表示以及处理法"><a href="#1-2-13-颜色的表示以及处理法" class="headerlink" title="1.2.13 颜色的表示以及处理法"></a>1.2.13 颜色的表示以及处理法</h2><ul>
+<li>我们来看在计算机中如何表示一个颜色</li>
+<li>颜色通道<ul>
+<li>我们通过八位二进制数来对颜色进行表示，八位二进制数最多能表示255个数值，一共三个通道24位二进制数，总共为1670万种。</li>
+<li>这种格式也被称为R8G8B8格式</li>
+</ul>
+</li>
+<li>颜色深度<ul>
+<li>颜色深度就是二进制数的总位数，如上述这种格式的颜色深度为24位</li>
+</ul>
+</li>
+<li>对于颜色的处理<ul>
+<li>我们可以对颜色进行一些处理，比如对颜色值乘以一个数值，或者对两个颜色值进行加减法运算，这些都是常见的处理方式。但我们限制单个颜色通道的范围为0~255之间。大于或小于这个数值都会被归为最大或最小值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="进阶-1-2-14-色彩空间的转换"><a href="#进阶-1-2-14-色彩空间的转换" class="headerlink" title="进阶 1.2.14 色彩空间的转换"></a>进阶 1.2.14 色彩空间的转换</h2><ul>
+<li>我们已经初步了解了色彩空间的概念，色彩空间有很多，我们可以通过程序方式，对色彩空间进行转换。各位可以运用自己的变成能力，完成一个RGB2HSV的转化运算。欢迎大家给出自己的解决方案！下面是提示：</li>
+</ul>
+<hr>
+<ul>
+<li>RGB2HSV</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022141834.png" alt="image.png"></li>
+<li>HSV2RGB<img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022141903.png" alt="image.png"></li>
+<li>作为本章的小作业，我会在文末给出我的源码供大家参考！<br>  小提示：mod为取模运算，即取余数</li>
+</ul>
+<hr>
+<h1 id="1-3-颜色模型"><a href="#1-3-颜色模型" class="headerlink" title="1.3 颜色模型"></a>1.3 颜色模型</h1><h2 id="1-3-1-什么是颜色模型"><a href="#1-3-1-什么是颜色模型" class="headerlink" title="1.3.1 什么是颜色模型"></a>1.3.1 什么是颜色模型</h2><ul>
+<li>前文我们提到了色彩空间，其中简单介绍了两种颜色模型，颜色模型有很多，但它们可以大体上分为两类：加色法模型和减色法模型</li>
+</ul>
+<hr>
+<h2 id="1-3-2-减色法模型（色料）"><a href="#1-3-2-减色法模型（色料）" class="headerlink" title="1.3.2 减色法模型（色料）"></a>1.3.2 减色法模型（色料）</h2><ul>
+<li>减色法模型主要模拟现实中调颜料的过程，打印机的原理就是这样，我们之前讲过，颜色实际上是其材料发射出的颜色，而其余颜色都被吸收了，如果你去调一盘颜料，会发现最后混合在一起就会变为黑色(美术同学应该深有体会)</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022144121.png" alt="image.png"></li>
+</ul>
+<hr>
+<ul>
+<li>但不管我们用什么颜料去调色也不应该会出现纯黑色，因此这个稍暗的颜色被称为黑色（K）</li>
+<li>而它对应的三原色是品红M青色C和黄色Y因此也被称作CMYK模型。</li>
+</ul>
+<hr>
+<h2 id="1-3-3-加色法模型（色光）"><a href="#1-3-3-加色法模型（色光）" class="headerlink" title="1.3.3 加色法模型（色光）"></a>1.3.3 加色法模型（色光）</h2><ul>
+<li>与前文减色法相对，在计算机以及物理中，我们会用加色来模拟真正的光线，从纯黑一步步添加颜色，最后叠加在一起被称为白色，而构成它的三原色也就是我们熟悉的RGB三种颜色</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241022144414.png" alt="image.png"></li>
+</ul>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>介绍了计算机图形学中图形渲染的基本概念，从画布和坐标系的基本定义入手，到光源、色彩及色彩空间的深入解析，再到颜色模型的区分。最终提供了一个基础的RGB转HSV的算法实现</li>
+</ul>
+<hr>
+<h1 id="进阶作业案例"><a href="#进阶作业案例" class="headerlink" title="进阶作业案例"></a>进阶作业案例</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">RGB</span> &#123;</span><br><span class="line">    <span class="type">int</span> r;</span><br><span class="line">    <span class="type">int</span> g;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">HSV</span> &#123;</span><br><span class="line">    <span class="type">float</span> h; <span class="comment">// 色相</span></span><br><span class="line">    <span class="type">float</span> s; <span class="comment">// 饱和度</span></span><br><span class="line">    <span class="type">float</span> v; <span class="comment">// 价值 (亮度)</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">HSV <span class="title">rgbToHsv</span><span class="params">(<span class="type">const</span> RGB&amp; rgb)</span> </span>&#123;</span><br><span class="line">    HSV hsv;</span><br><span class="line">    <span class="type">float</span> r = rgb.r / <span class="number">255.0</span>;</span><br><span class="line">    <span class="type">float</span> g = rgb.g / <span class="number">255.0</span>;</span><br><span class="line">    <span class="type">float</span> b = rgb.b / <span class="number">255.0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> maxVal = std::<span class="built_in">max</span>(&#123;r, g, b&#125;);</span><br><span class="line">    <span class="type">float</span> minVal = std::<span class="built_in">min</span>(&#123;r, g, b&#125;);</span><br><span class="line">    <span class="type">float</span> delta = maxVal - minVal;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算亮度</span></span><br><span class="line">    hsv.v = maxVal;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算饱和度</span></span><br><span class="line">    <span class="keyword">if</span> (maxVal != <span class="number">0</span>) &#123;</span><br><span class="line">        hsv.s = delta / maxVal;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 这里如果 maxVal 是 0，说明 RGB 都是 0</span></span><br><span class="line">        hsv.s = <span class="number">0</span>;</span><br><span class="line">        hsv.h = <span class="number">0</span>; <span class="comment">// 设定为 0</span></span><br><span class="line">        <span class="keyword">return</span> hsv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算色相</span></span><br><span class="line">    <span class="keyword">if</span> (delta == <span class="number">0</span>) &#123;</span><br><span class="line">        hsv.h = <span class="number">0</span>; <span class="comment">// 如果没有颜色，则色相为 0</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (maxVal == r) &#123;</span><br><span class="line">            hsv.h = <span class="number">60</span> * <span class="built_in">fmod</span>((g - b) / delta, <span class="number">6</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (maxVal == g) &#123;</span><br><span class="line">            hsv.h = <span class="number">60</span> * ((b - r) / delta + <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (maxVal == b) &#123;</span><br><span class="line">            hsv.h = <span class="number">60</span> * ((r - g) / delta + <span class="number">4</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (hsv.h &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            hsv.h += <span class="number">360</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hsv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RGB rgb;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入 RGB 值 (r, g, b) 范围在 [0, 255] 之间: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; rgb.r &gt;&gt; rgb.g &gt;&gt; rgb.b;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输入有效性检查</span></span><br><span class="line">    <span class="keyword">if</span> (rgb.r &lt; <span class="number">0</span> || rgb.r &gt; <span class="number">255</span> || rgb.g &lt; <span class="number">0</span> || rgb.g &gt; <span class="number">255</span> || rgb.b &lt; <span class="number">0</span> || rgb.b &gt; <span class="number">255</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;RGB 值必须在 [0, 255] 之间!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    HSV hsv = <span class="built_in">rgbToHsv</span>(rgb);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;对应的 HSV 值为: &quot;</span> &lt;&lt; <span class="string">&quot;H: &quot;</span> &lt;&lt; hsv.h &lt;&lt; <span class="string">&quot;, S: &quot;</span> &lt;&lt; hsv.s &lt;&lt; <span class="string">&quot;, V: &quot;</span> &lt;&lt; hsv.v &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>欢迎批评指正！</li>
+</ul>
+<hr>
+<h2 id="参考资料以及链接"><a href="#参考资料以及链接" class="headerlink" title="参考资料以及链接"></a>参考资料以及链接</h2><ul>
+<li>计算机图形学入门——3D渲染指南       GabrielGambetta著 贾凡译</li>
+<li>games101图形学入门——闫令琪 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744">https://www.bilibili.com/video/BV1X7411F744</a></li>
+<li>技术美术百人计划——霜狼may等 <a target="_blank" rel="noopener" href="https://learn.u3d.cn/tutorial/technical-artist-may">https://learn.u3d.cn/tutorial/technical-artist-may</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">http://example.com/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/11/08/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a><a class="pagination-related" href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/" title="入门图形学0——图形学引入"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">入门图形学0——图形学引入</div></div><div class="info-2"><div class="info-item-1">什么是图形学？图形学能做些什么？</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我不是在教课，我只是在贯彻费曼学习法</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-1%E7%94%BB%E5%B8%83%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">1.1画布与坐标系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-1%E7%94%BB%E5%B8%83%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.1画布的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-2-%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">1.2.</span> <span class="toc-text">1.1.2 坐标系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-3-%E5%B7%A6%E5%8F%B3%E6%89%8B%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">1.3.</span> <span class="toc-text">1.1.3 左右手坐标系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-%E8%89%B2%E5%BD%A9%E4%B8%8E%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4"><span class="toc-number">2.</span> <span class="toc-text">1.2 色彩与色彩空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-1%E8%89%B2%E5%BD%A9%E7%9A%84%E6%84%9F%E6%80%A7%E7%90%86%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">1.2.1色彩的感性理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-2%E8%89%B2%E5%BD%A9%E7%9A%84%E7%90%86%E6%80%A7%E7%90%86%E8%A7%A3"><span class="toc-number">2.2.</span> <span class="toc-text">1.2.2色彩的理性理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-3%E5%85%89%E6%BA%90%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.3.</span> <span class="toc-text">1.2.3光源的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-4-%E5%85%89%E4%BC%A0%E6%92%AD%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.</span> <span class="toc-text">1.2.4 光传播的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-5-%E5%85%89%E6%BA%90%E7%9A%84%E6%8E%A5%E5%8F%97%E8%80%85"><span class="toc-number">2.5.</span> <span class="toc-text">1.2.5 光源的接受者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-6-%E8%89%B2%E5%BD%A9%E7%9A%84%E7%8C%9C%E6%83%B3"><span class="toc-number">2.6.</span> <span class="toc-text">1.2.6 色彩的猜想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-7-%E8%89%BA%E6%9C%AF%E5%AE%B6%E4%BB%AC%E7%9A%84Munsell%E8%89%B2%E5%BD%A9%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.7.</span> <span class="toc-text">1.2.7 艺术家们的Munsell色彩系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-8-%E7%A7%91%E5%AD%A6%E5%AE%B6%E4%BB%AC%E7%9A%84-RGB-CSS%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.8.</span> <span class="toc-text">1.2.8 科学家们的 RGB CSS系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-9-%E5%9F%BA%E7%A1%80%E7%9A%84%E8%89%B2%E5%9F%9F%E6%A6%82%E5%BF%B5"><span class="toc-number">2.9.</span> <span class="toc-text">1.2.9 基础的色域概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-10-%E8%89%B2%E5%9F%9F%E4%B8%8EYxy%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4"><span class="toc-number">2.10.</span> <span class="toc-text">1.2.10 色域与Yxy色彩空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-11-%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.11.</span> <span class="toc-text">1.2.11 色彩空间的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-12-sRGB%E7%A9%BA%E9%97%B4"><span class="toc-number">2.12.</span> <span class="toc-text">1.2.12 sRGB空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-13-%E9%A2%9C%E8%89%B2%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%BB%A5%E5%8F%8A%E5%A4%84%E7%90%86%E6%B3%95"><span class="toc-number">2.13.</span> <span class="toc-text">1.2.13 颜色的表示以及处理法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6-1-2-14-%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.14.</span> <span class="toc-text">进阶 1.2.14 色彩空间的转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-3-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">1.3 颜色模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">1.3.1 什么是颜色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-2-%E5%87%8F%E8%89%B2%E6%B3%95%E6%A8%A1%E5%9E%8B%EF%BC%88%E8%89%B2%E6%96%99%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">1.3.2 减色法模型（色料）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-3-%E5%8A%A0%E8%89%B2%E6%B3%95%E6%A8%A1%E5%9E%8B%EF%BC%88%E8%89%B2%E5%85%89%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">1.3.3 加色法模型（色光）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E4%BD%9C%E4%B8%9A%E6%A1%88%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text">进阶作业案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E4%BB%A5%E5%8F%8A%E9%93%BE%E6%8E%A5"><span class="toc-number">5.1.</span> <span class="toc-text">参考资料以及链接</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2024/11/08/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2024-11-08T08:56:10.323Z" title="发表于 2024-11-08 08:56:10">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="入门图形学1——基本概念"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学1——基本概念"/></a><div class="content"><a class="title" href="/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="入门图形学1——基本概念">入门图形学1——基本概念</a><time datetime="2024-11-08T00:00:00.000Z" title="发表于 2024-11-08 00:00:00">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/" title="入门图形学0——图形学引入"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学0——图形学引入"/></a><div class="content"><a class="title" href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/" title="入门图形学0——图形学引入">入门图形学0——图形学引入</a><time datetime="2024-10-31T00:00:00.000Z" title="发表于 2024-10-31 00:00:00">2024-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/26/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%947/" title="Ue材质入门——7"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——7"/></a><div class="content"><a class="title" href="/2024/10/26/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%947/" title="Ue材质入门——7">Ue材质入门——7</a><time datetime="2024-10-26T00:00:00.000Z" title="发表于 2024-10-26 00:00:00">2024-10-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/25/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%946/" title="Ue材质入门——6"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——6"/></a><div class="content"><a class="title" href="/2024/10/25/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%946/" title="Ue材质入门——6">Ue材质入门——6</a><time datetime="2024-10-25T00:00:00.000Z" title="发表于 2024-10-25 00:00:00">2024-10-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
