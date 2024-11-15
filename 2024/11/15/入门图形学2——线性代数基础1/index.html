@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>入门图形学2——位置与方向 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="图形学中我们如何描述物体的点和方向？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门图形学2——位置与方向">
+<meta property="og:url" content="http://example.com/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="图形学中我们如何描述物体的点和方向？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png">
+<meta property="article:published_time" content="2024-11-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T11:50:17.648Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '入门图形学2——位置与方向',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%88%86%E4%BA%AB%E8%AF%BE%E5%A4%B4%E5%9B%BE.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">入门图形学2——位置与方向</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">入门图形学2——位置与方向</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-15T00:00:00.000Z" title="发表于 2024-11-15 00:00:00">2024-11-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-15T11:50:17.648Z" title="更新于 2024-11-15 11:50:17">2024-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A6/">入门图形学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="2-1-点"><a href="#2-1-点" class="headerlink" title="2.1 点"></a>2.1 点</h1><ul>
+<li>在上一节我们讲到，<strong>坐标系</strong>是图形学以及数学物理学等等学科中非常重要而基本的概念</li>
+<li>坐标系又是有一系列<strong>离散</strong>的点（离散就是分散开的不连续的）组成的。</li>
+<li>那么在这里我们就可以很简单的定义点：</li>
+</ul>
+<h2 id="2-1-1-点的定义"><a href="#2-1-1-点的定义" class="headerlink" title="2.1.1 点的定义"></a>2.1.1 点的定义</h2><ul>
+<li>图形学中<strong>点</strong> 是坐标系中的一个<strong>位置，同时也是一个数组，记录这这个点所代表的值</strong>我们称为<strong>坐标</strong></li>
+<li>点具有数值，维度这两个特征，并且是唯一的。</li>
+</ul>
+<hr>
+<h1 id="2-2-向量"><a href="#2-2-向量" class="headerlink" title="2.2 向量"></a>2.2 向量</h1><h2 id="2-2-1-物理学家眼里的向量"><a href="#2-2-1-物理学家眼里的向量" class="headerlink" title="2.2.1 物理学家眼里的向量"></a>2.2.1 物理学家眼里的向量</h2><ul>
+<li>在物理学中，向量也被称为矢量，它更多是描述一种<strong>运动</strong>，包含了运动的<strong>速度和方向</strong>，它的位置是没有意义的，可以在任何位置出现，下面是一个简单的例子</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241023113238.png" alt="image.png"><br>                      <code>2.2.1物理学家眼中的向量</code></li>
+<li>这是一个三维空间里的向量分布，可以看出它们仅仅代表着不同的方向以及长度大小，它们的颜色值是根据数值对应的RGB颜色计算出来的（就像我们上节课所了解到的）</li>
+<li>这是一种理解方式，但计算机学家眼中，还有另一种理解。</li>
+</ul>
+<h2 id="2-2-2-计算机学家眼里的向量"><a href="#2-2-2-计算机学家眼里的向量" class="headerlink" title="2.2.2 计算机学家眼里的向量"></a>2.2.2 计算机学家眼里的向量</h2><ul>
+<li>计算机学家眼中，向量与物理学家眼中的不太相同，我们更多只在意它的<strong>数值特征</strong>，毕竟计算机的根本就是一组一组的数据运算（详细可在计算机基础入门中了解）</li>
+<li>因此在他们眼里，向量也许是这样的：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241023113747.png" alt="image.png"><br>                   <code>2.2.2 计算机学家眼中的向量</code></li>
+<li>在这个例子中，我们记录的两个数本身有自身所代表的含义，而我们却忽略了其位置，毕竟一个房屋的售价和平米而言，位置信息对他们是无效的。</li>
+<li>而数学家却尽力概括这两个观点，他们就提出了我们所学习到的数学上对向量的定义</li>
+</ul>
+<h2 id="2-2-3-向量的定义"><a href="#2-2-3-向量的定义" class="headerlink" title="2.2.3 向量的定义"></a>2.2.3 向量的定义</h2><ul>
+<li><strong>向量是在坐标系下，以原点为起点的有一定距离的有向线段。</strong></li>
+<li>本质上它们表示的是两点之间的<strong>差异，或者说是一个点如何变化到另一个点的指示。</strong></li>
+<li>向量与点类似，同样具备两个特征，那就是<strong>方向（所指的角度）以及大小（它的长度）</strong></li>
+<li>在计算机中，向量往往作为变化的一种手段，我们可以利用它进行物体或者数值的变换，这种变换是对于坐标系而言的。</li>
+</ul>
+<h2 id="2-2-4-基本的向量的运算"><a href="#2-2-4-基本的向量的运算" class="headerlink" title="2.2.4 基本的向量的运算"></a>2.2.4 基本的向量的运算</h2><ul>
+<li><strong>点与向量的运算</strong><ul>
+<li>点的减法运算<ul>
+<li>向量是两点只差，有了这个根据我们就可以通过两点位置的计算来表示一个向量，比如从P点到O点的运动方式，我们就可以理解为一个向量，让我们表示它！</li>
+<li>O(Ox，Oy) - P(Px，Py) &#x3D; Vpo</li>
+<li>我们一定要从几何直观上理解它，就像这样：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241023115903.png" alt="image.png"><br>                   <code>2.2.4 点与向量的运算</code></li>
+</ul>
+</li>
+<li>点的加法运算<ul>
+<li>实际上我们已经可以描述点的加法运算了，它本质上只是减法的逆运算，因此我们可以描述P到O的运算，就像这样：</li>
+<li>P(Px，Py) + Vop &#x3D; (Ox，Oy) </li>
+<li>描述的实际上还是这个过程，很容易理解。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>向量之间的运算</strong><ul>
+<li>向量与向量的<strong>加法</strong><ul>
+<li>向量之间的加法本质上也可以用过<strong>点</strong>来定义，因为前文告诉我们实际上向量也是由点来表述的，因此我们可在二维坐标系下，定义一个向量的加减法，就像我们定义点与向量的运算一样</li>
+<li>点P(Px，Py) ，(Ox，Oy) ，Q(Qx,Qy) </li>
+<li>向量：O(Ox，Oy) - P(Px，Py) &#x3D; Vpo，Q(Qx，Qy) - P(Px，Py) &#x3D; Vpq</li>
+<li>所以<ul>
+<li>Vpo + Vpq &#x3D; O(Ox，Oy) - P(Px，Py) +Q(Qx，Qy) - P(Px，Py)<br>  &#x3D; (Ox+Qx - 2Px,Oy + Qy - 2Py)</li>
+</ul>
+</li>
+<li>计算很简单，但我们如何去描述它呢，实际上它让我们做了什么？</li>
+<li>前文提到，计算机中向量的运算实际上就是改变一个数的值，我们完成的实际上是一个全局尺度的变换。</li>
+<li>从P出发我们先到了O，此时如果用我们上面的值来表示（Px + Ox - Px，Py+ Oy - Py）最后运算得到的就是O点，而后我们再向着Vpq所代表的方向运动那就是（Ox + Qx -Px，Oy + Qy - Py)。为何与上面的结果有所不同？</li>
+<li>细心地同学会马上指出，你求得的结果是个点啊！</li>
+<li>没错，我们上面推导的实际上是对于一个点而言的变化，而前面所推的则是向量的加减法。他们有什么区别？没错，因为向量是忽略位置而只是一个操作，所以我们没有加上最开始的点坐标。而他们之间其实就是这个差别。</li>
+<li>由此我们系统的论证了为何向量是指示一个点到另一个点的变化。这种加法法则也被称为向量的四边形法则：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241023131800.png" alt="image.png"><br>                 <code>2.2.4.1向量的四边形法则</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>向量的数乘</strong><ul>
+<li>向量的数乘实际上并不难理解，数乘可以看做一个缩放操作，是只对于向量的数值大小进行的变化</li>
+<li>但同样会有一个例外：如果乘数是个负数，那么就会导致向量变化为反方向的一个新向量，相当于向反方向进行缩放。</li>
+</ul>
+</li>
+<li><strong>向量的模</strong><ul>
+<li>向量的模|a|其实就是描述向量长度的方式，这个需要运用一定的勾股定理去理解，实际上我们是将向量的分量作为描述模的方式也就是<ul>
+<li>|a|  &#x3D; √ Ax^2 + Ay^2</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>向量的归一化</strong><ul>
+<li>向量的归一化是保留向量方向信息而忽略其长度信息的一种操作。比如在计算光线与法线的过程中，我们只需要知道方向信息就可以了，而过多的信息会造成数据存储的浪费，而如何进行这个操作呢</li>
+<li>我们观察模的定义，会发现，如果我们想让模为1，实际上只需要将一个向量的每一个值除以他们的模，这是个很巧妙的数学方法</li>
+</ul>
+</li>
+<li><strong>基向量</strong><ul>
+<li>现在，我们终于可以介绍这个概念了，基向量是我们描述一个坐标系的方式，往往一对或几对相互垂直的基向量使我们定义一个基本的坐标系空间的方式，他们的特点是：模长为1，方向相互垂直，本质上是便于我们通过这个向量，来描述其他向量。如我们之前的Vpo向量就可以写成：<ul>
+<li>Vx &#x3D; （Ox - Px）* Xi ， Vy &#x3D; （Oy - Py ）* Yi</li>
+</ul>
+</li>
+<li>这样做什么好处，好像根本没有什么变化啊！？毕竟模长是1乘上去压根不会有什么变化</li>
+<li>实际上，这就是我们本次课或者说图形学最终的运行逻辑。就是通过变换基向量来进行空间的变换。试想一下，如果变换每一个向量每一个点来转换一个模型是不是会很麻烦？</li>
+<li>那么如果我们变换基向量本身呢？没错，这样的话我们就可以很简单的将一个空间理所应当的改变为另一个空间了，而不用变换里面的每一个点。因为点本身就是这些基向量形成的，本质只是数乘而已。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241023144002.png" alt="image.png"><br>              <code>2.2.4.2 三个基向量张成一个向量空间</code></li>
+</ul>
+</li>
+<li><strong>向量的乘法</strong><ul>
+<li>点积<ul>
+<li>点积是向量与向量相乘的结果，它最后得到的是一个数，公式如下<ul>
+<li>a·b  &#x3D; axbx + ayby</li>
+</ul>
+</li>
+<li>点积不但可以描述角度信息也可以描述一个向量再另一个向量方向上的投影长度<ul>
+<li>a·b &#x3D; |a||b|cos&lt;a,b&gt;</li>
+</ul>
+</li>
+<li>通过这个公式我们可以快速得出a，b之间夹角值，以及ab的大致方向判断。</li>
+</ul>
+</li>
+<li>点积的特性使我们可以利用它将一个向量分为水平方向和垂直方向的分向量，为我们后期描述向量之间的关系提供了一个有力手段。</li>
+<li>点积的实际应用：<ul>
+<li>比如在计算光线与物体法线的关系中，我们就可以通过点积运算快速得出一个物体的受光信息：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241015154216.png" alt="image.png"><br>                  <code>2.2.4.3 点积的应用——判断着色</code></li>
+</ul>
+</li>
+<li>叉积<ul>
+<li>叉积是向量之间的另一种运算，不同的是，它只适用于3维计算，它得到的不是一个数而是一个向量。<ul>
+<li>a×b &#x3D; 【aybz - azby，axbz - azbx，axby - aybx】</li>
+<li>axb &#x3D; （aybz - azby）x +（axbz - azbx）y +（axby - aybx）z</li>
+</ul>
+</li>
+<li>叉积描述的是一个垂直于相乘的两个向量所构成平面的向量，因此往往应用于求解法向量。</li>
+<li>叉积同样可以描述两个向量之间的角度关系<ul>
+<li>a×b &#x3D; |a||b|sin&lt;a,b&gt;</li>
+</ul>
+</li>
+<li>但需要注意的是，叉积可能会存在两个不同结果，这显而易见，因为垂直于ab平面的向量有两个，如何去判别他们呢？</li>
+<li>我们可以通过平移向量使他们首尾相连，并判断是顺时针还是逆时针方向，通过左右手坐标系来判别他们的方向</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241025104047.png" alt="image.png"><br>                  <code>2.2.4.4 叉积存在两个方向 </code></li>
+</ul>
+</li>
+<li>叉积的应用<ul>
+<li>判定左右</li>
+<li>前文我们提到，叉积有两个方向，并且我们可以根据方向的不同判定原始向量的旋向性，那么由此，我们就可以判断这两个向量之间的左右关系了，比如顺时针的方向排布，b在a的左边</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241025115422.png" alt="image.png"><br>                  <code>2.2.4.5 插件的应用——判断左右</code></li>
+<li>判断内外</li>
+<li>这是一个很重要的应用那就是判断一个点是否在三角形内，这会在我们后续的<strong>光栅化</strong>阶段应用。我们可以依次连接一点与一个三角形顶点，并将其作为一个向量与三角形顶点组成的向量做叉积，如果三个顶点判断都为同一侧(左侧或者右侧)我们就将其判定为在三角形内，并渲染这个点到屏幕上。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241025120903.png" alt="image.png"><br>                  <code>2.2.4.6叉积的应用——判断内外</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="进阶2-3-在Processing中实践"><a href="#进阶2-3-在Processing中实践" class="headerlink" title="进阶2.3 在Processing中实践"></a>进阶2.3 在Processing中实践</h2><h2 id="2-3-1-向量加减法的直观实现"><a href="#2-3-1-向量加减法的直观实现" class="headerlink" title="2.3.1 向量加减法的直观实现"></a>2.3.1 向量加减法的直观实现</h2><p>我们通过Processing来定义两个向量构造函数，在Processing中我们进行如下定义，首先我们需要定义一个Pvector基类来实现向量，如下：<br>![[Pasted image 20240524162520.png]]<br>在这些代码中，我们分别创建了三个向量对象，并且为他们赋值，让他们分别在xy上有了对应的值，因此我们可以在ellipse这个函数之中传入我们创建的对象的值，这样，我们就可以在想对应的坐标处为中心，创建圆形，add参数本质上就是将向量的对应坐标相加，得到v3的值。</p>
+<hr>
+<p>效果如下：<br>![[Pasted image 20240524162856.png]]</p>
+<hr>
+<h2 id="2-3-2-点乘的直观实现"><a href="#2-3-2-点乘的直观实现" class="headerlink" title="2.3.2 点乘的直观实现"></a>2.3.2 点乘的直观实现</h2><p>![[Pasted image 20240524164159.png]]</p>
+<hr>
+<p>同样，我们在其中使用dot函数，就可以进行点乘。我们还是定义两个向量，并且传入两个向量的位置，调用line绘制两条线段，而后，我们将v2标准化，也就是作为1，并且我们将标准化后的v2，作为值与v1进行点积，实际上我们得到的就是v1在v2上的投影，而后我们将v2乘上这个投影，并且绘制，就可以得到如下图形：<br>![[Pasted image 20240524164140.png]]</p>
+<hr>
+<h2 id="2-3-3向量叉乘的直观实现："><a href="#2-3-3向量叉乘的直观实现：" class="headerlink" title="2.3.3向量叉乘的直观实现："></a>2.3.3向量叉乘的直观实现：</h2><p>叉乘本质上就是先进行两个向量的标准化，也就是与基向量点乘，而后，将它们赋值给一个新的向量。这个新的向量就是标准化之后的向量。</p>
+<p>我们来看一下它的实现<br>![[Pasted image 20240524183848.png]]<br>首先我们新建两个变量，然后在中心位置新建一个点，我们在这个点为基准，绘制两条支线，然后以这两条支线为基准，使用叉乘函数生成我们的第三条线段，它是垂直于另外两条线段的，然后我们将它标准化，也就是除以模长，之后，绘制：效果如下图：</p>
+<hr>
+<p>![[Pasted image 20240524184007.png]]</p>
+<hr>
+<h1 id="个人思考："><a href="#个人思考：" class="headerlink" title="个人思考："></a>个人思考：</h1><ul>
+<li>Q：为何要点乘正交基来进行向量的叉乘运算？</li>
+<li>A：是为了在世界坐标系内进行向量的计算，能够标准化所有的向量</li>
+<li>![[Pasted image 20240524165209.png]]</li>
+<li>![[Pasted image 20240524165220.png]]<br>          <code>笛卡尔坐标系下的叉乘</code></li>
+</ul>
+<hr>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>计算机图形学入门——3D渲染指南       GabrielGambetta著 贾凡译</li>
+<li>games101图形学入门——闫令琪 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744">https://www.bilibili.com/video/BV1X7411F744</a></li>
+<li>游戏开发入门——数学和物理 徐芝琦等著</li>
+<li>UnityShaderLab新手宝典 唐福幸著</li>
+<li>Shader开发实战 KyleHalladay著 郭华丰 韦静译</li>
+<li>DirectX12 3D游戏开发实战（龙书）Frank D.Luna 著 王臣译</li>
+<li>【【官方双语&#x2F;合集】线性代数的本质 - 系列合集】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ys411472E/?p=2&share_source=copy_web&vd_source=18d60239a339ad21d3b3f050742622f4">https://www.bilibili.com/video/BV1ys411472E/?p=2&amp;share_source=copy_web&amp;vd_source=18d60239a339ad21d3b3f050742622f4</a></li>
+<li>Fundamental Of ComputerGraphics（虎书）by Steve Marschner</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/">http://example.com/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/11/15/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a><a class="pagination-related" href="/2024/11/08/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%948/" title="Ue材质入门——8"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Ue材质入门——8</div></div><div class="info-2"><div class="info-item-1">虚幻引擎基础运算逻辑节点</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我不是在教课，我只是在贯彻费曼学习法</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">2.1 点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1-%E7%82%B9%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">2.1.1 点的定义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-2-%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">2.2 向量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-1-%E7%89%A9%E7%90%86%E5%AD%A6%E5%AE%B6%E7%9C%BC%E9%87%8C%E7%9A%84%E5%90%91%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.2.1 物理学家眼里的向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E5%AE%B6%E7%9C%BC%E9%87%8C%E7%9A%84%E5%90%91%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.2 计算机学家眼里的向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-3-%E5%90%91%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.3.</span> <span class="toc-text">2.2.3 向量的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-4-%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%90%91%E9%87%8F%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">2.4.</span> <span class="toc-text">2.2.4 基本的向量的运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B62-3-%E5%9C%A8Processing%E4%B8%AD%E5%AE%9E%E8%B7%B5"><span class="toc-number">2.5.</span> <span class="toc-text">进阶2.3 在Processing中实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-1-%E5%90%91%E9%87%8F%E5%8A%A0%E5%87%8F%E6%B3%95%E7%9A%84%E7%9B%B4%E8%A7%82%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.6.</span> <span class="toc-text">2.3.1 向量加减法的直观实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-2-%E7%82%B9%E4%B9%98%E7%9A%84%E7%9B%B4%E8%A7%82%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.</span> <span class="toc-text">2.3.2 点乘的直观实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-3%E5%90%91%E9%87%8F%E5%8F%89%E4%B9%98%E7%9A%84%E7%9B%B4%E8%A7%82%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">2.8.</span> <span class="toc-text">2.3.3向量叉乘的直观实现：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">个人思考：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/15/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2024/11/15/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2024-11-15T11:50:17.648Z" title="发表于 2024-11-15 11:50:17">2024-11-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/" title="入门图形学2——位置与方向"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学2——位置与方向"/></a><div class="content"><a class="title" href="/2024/11/15/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A62%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%801/" title="入门图形学2——位置与方向">入门图形学2——位置与方向</a><time datetime="2024-11-15T00:00:00.000Z" title="发表于 2024-11-15 00:00:00">2024-11-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%948/" title="Ue材质入门——8"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/ring-7218706_1920.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ue材质入门——8"/></a><div class="content"><a class="title" href="/2024/11/08/Ue%E6%9D%90%E8%B4%A8%E5%85%A5%E9%97%A8%E2%80%94%E2%80%948/" title="Ue材质入门——8">Ue材质入门——8</a><time datetime="2024-11-08T00:00:00.000Z" title="发表于 2024-11-08 00:00:00">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="入门图形学1——基本概念"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学1——基本概念"/></a><div class="content"><a class="title" href="/2024/11/08/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A61%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="入门图形学1——基本概念">入门图形学1——基本概念</a><time datetime="2024-11-08T00:00:00.000Z" title="发表于 2024-11-08 00:00:00">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/" title="入门图形学0——图形学引入"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学0——图形学引入"/></a><div class="content"><a class="title" href="/2024/10/31/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A60%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%BC%95%E5%85%A5/" title="入门图形学0——图形学引入">入门图形学0——图形学引入</a><time datetime="2024-10-31T00:00:00.000Z" title="发表于 2024-10-31 00:00:00">2024-10-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
