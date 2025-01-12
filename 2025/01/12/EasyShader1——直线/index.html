@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>EasyShader——直线 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="如何绘制一条直线？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EasyShader——直线">
+<meta property="og:url" content="http://example.com/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="如何绘制一条直线？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png">
+<meta property="article:published_time" content="2025-01-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-12T03:44:01.890Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'EasyShader——直线',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%88%86%E4%BA%AB%E8%AF%BE%E5%A4%B4%E5%9B%BE.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">EasyShader——直线</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">EasyShader——直线</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-12T00:00:00.000Z" title="发表于 2025-01-12 00:00:00">2025-01-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-12T03:44:01.890Z" title="更新于 2025-01-12 03:44:01">2025-01-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/EasyShader/">EasyShader</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>本文初衷是为了配合入门图形学教程制作的同期系列编程教程，面向具有一定的编程语言学习基础的同学们，欢迎各位讨论交流！</li>
+<li>本文将在图形学第八节课后随课程实时更新，共分为四个板块——直线绘制，三角形绘制，三角形填充，光线着色计算，最后可以得到一个具备基本亮暗面阴影的模型。</li>
+<li>本文只是最基本的渲染器部分，后续会继续更新进阶版本内容。本文需要配合IDE使用，你可以访问我的库，其中的EasyRender项目有项目源码</li>
+</ul>
+<hr>
+<h1 id="1-1直线的数学定义"><a href="#1-1直线的数学定义" class="headerlink" title="1.1直线的数学定义"></a>1.1直线的数学定义</h1><h2 id="1-1-1-为什么又是数学"><a href="#1-1-1-为什么又是数学" class="headerlink" title="1.1.1 为什么又是数学"></a>1.1.1 为什么又是数学</h2><ul>
+<li>可能很多同学看到数学又出现了会感到厌烦，我很能理解大家的感受，但实际情况是，我们不能避免这种情况的发生，因为数学是我们的工具，我们做渲染本身实际上就是用数学去表达世界，因此数学是我们必须要去学习和认识的，况且，我们所用到的数学并 不难只需要大家去分析理解就够了。</li>
+</ul>
+<hr>
+<h2 id="1-1-2-我们如何表示直线"><a href="#1-1-2-我们如何表示直线" class="headerlink" title="1.1.2 我们如何表示直线"></a>1.1.2 我们如何表示直线</h2><ul>
+<li>在高中我们就学过了一条直线基本的表示方法，那就是点斜式表示法，可以写成：<ul>
+<li>*P &#x3D; P0 + t(P1 - P0)</li>
+</ul>
+</li>
+<li>同样，我们也可以将其拆分为x轴向上的以及y轴向上的坐标，方便我们理解实际的实现<ul>
+<li>*x &#x3D; x0 + t(x1 -x0)</li>
+<li>*y &#x3D; y0 + t(y1 - y0)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>非常好，我们现在只需要去解决t这个变量了，通过联立上面的等式，我们可以得到<ul>
+<li>*t &#x3D; x - x0 &#x2F; y - y0</li>
+</ul>
+</li>
+<li>随后，我们将其带入方程，就能得到我们想要的点斜式雏形了。<ul>
+<li>*y &#x3D; y0 + (x - x0)(y1 - y0)&#x2F;x1 - x0</li>
+</ul>
+</li>
+<li>这时，我们发现，其实 (y1 - y0)&#x2F;x1 - x0 是一个常数，所以我将其设为a ， 当然 y0也是一个常数，我们设其为b，因此我们得到了我们喜闻乐见的公式<ul>
+<li>y &#x3D; ax + b</li>
+</ul>
+</li>
+<li>现在，我们已经具备的基本的数学认知，可以进行实践了！</li>
+</ul>
+<hr>
+<h1 id="1-2-准备工作"><a href="#1-2-准备工作" class="headerlink" title="1.2 准备工作"></a>1.2 准备工作</h1><ul>
+<li>首先，请保证你正确地将以下资源放入你的项目目录中，它们会提供一切你所需的包括但不限于函数，变量等。</li>
+<li>1.geomertry.h<ul>
+<li>这个头文件定义了基本的几何数据类型，如二维向量，三维向量等。</li>
+</ul>
+</li>
+<li>2.tgaimage.h<ul>
+<li>这个头文件包含我们设置颜色产生图片的函数声明，非常重要，是帮助我们创建画布的关键对象。</li>
+</ul>
+</li>
+<li>3.tgaimage.cpp<ul>
+<li>这个文件包含了上述tgaimage头文件的函数实现，会为我们设置对应的像素颜色。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-2-1-什么是TGA格式"><a href="#1-2-1-什么是TGA格式" class="headerlink" title="1.2.1 什么是TGA格式"></a>1.2.1 什么是TGA格式</h2><ul>
+<li>它是一种光栅化图形格式</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241107213822.png" alt="image.png"><br>          <code>TR 1.2.1TGA 的维基百科定义 </code></li>
+<li>我们可以自由的用其最关键的<code>set（）</code>函数来填充像素，它接受四个参数，分别是x，y坐标以及绘制对象的引用还有颜色。下面让我们创建你的第一个光栅化着色器。</li>
+</ul>
+<hr>
+<h2 id="1-2-2-创建项目"><a href="#1-2-2-创建项目" class="headerlink" title="1.2.2 创建项目"></a>1.2.2 创建项目</h2><ul>
+<li>你可以使用任何你喜欢的IDE，这里演示时我们将使用VS2022版本进行演示。首先，创建你的项目，这里默认各位都是没有问题的，我们直接快进到main函数所在的CPP文件。</li>
+<li>请包含以下基础的头文件</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include<span class="string">&quot;TGAImage.h&quot;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>下面我们来完成main函数，我们需要明确我们光栅化的逻辑，我们对对象进行算法处理，最后告诉TGA我们要怎么绘制它，所以基本的main函数应该是这样的</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">TGAImage <span class="title">image</span><span class="params">(width, height, TGAImage::RGB)</span></span>;</span><br><span class="line">	image.<span class="built_in">write_tga_file</span>(<span class="string">&quot;TRIANGLE.tga&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在第一行我们定义了一个TGAImage类型的变量image，它接受三个值，用于设定这个变量的长宽以及色彩通道，这里我们需要创建全局固定变量width以及height用于设定图像的长宽高，这里我们设定为1920×1080。</li>
+<li>第二行我们用这个实例化对象调用了内置的<code>write_tga_file（）</code>方法，这个方法接受一个字符串变量，是我们在文件夹中创建的tga格式的文件，设置完成后，我们就可以来到我们最关注的代码部分了。</li>
+</ul>
+<hr>
+<h1 id="1-3-直线算法实现"><a href="#1-3-直线算法实现" class="headerlink" title="1.3 直线算法实现"></a>1.3 直线算法实现</h1><h2 id="1-3-1-第一版直线代码"><a href="#1-3-1-第一版直线代码" class="headerlink" title="1.3.1 第一版直线代码"></a>1.3.1 第一版直线代码</h2><ul>
+<li>如你所见，我们只需要根据我们第一次想到的逻辑去绘制这条直线就好了，它看起来应该是这样的：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">line</span><span class="params">(<span class="type">int</span> x0 , <span class="type">int</span> y0,<span class="type">int</span> x1,<span class="type">int</span> y1 , TGAImage &amp;imag,TGAColor)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">float</span> t = <span class="number">0.</span>; t&lt;<span class="number">1</span>;t+=<span class="number">.01</span>)&#123;</span><br><span class="line">		<span class="type">int</span> x = x0 + (x1 - x0)*t;</span><br><span class="line">		<span class="type">int</span> y = y0 + (y1 - x0)*t;</span><br><span class="line">		image.<span class="built_in">set</span>(x,y,color);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>这些代码是什么意思呢？首先它接受六个参数，分别是这条直线的起始和结束的横纵坐标，以及需要写入的TGA图片对象，以及颜色信息。</li>
+<li>随后我们以0.01为步长，开始这个循环，也就是一共会完成十次渲染每一次逐渐逼近填充到目标位置，最后一次就会设置所有路径上的像素。</li>
+</ul>
+<hr>
+<ul>
+<li>最后使用image对象自身具备的set函数，设置像素，看起来是这样的：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241108113705.png" alt="image.png"><br>                  <code>1.3.1 线段——第一次尝试</code></li>
+</ul>
+<hr>
+<h2 id="1-3-2-第一次尝试改进"><a href="#1-3-2-第一次尝试改进" class="headerlink" title="1.3.2 第一次尝试改进"></a>1.3.2 第一次尝试改进</h2><ul>
+<li>首先这段代码要遍历100次，速度非常慢，并且如果调整步长，会导致像素之间分离，让直线断开。接下来我们需要对其调整，我们不希望因为步长原因舍弃直线的精度同样也不希望因此导致绘制失败，所以我们要回归最基本的内容，那就是我们只负责绘制每一个点上的像素，而其解决方法就是，以x为准，绘制x1 - x0 次，我们就应该能够得到所需线段。</li>
+<li>于是我们有了以下的改进：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">line</span><span class="params">(<span class="type">int</span> x0,<span class="type">int</span> y0,<span class="type">int</span> x1,<span class="type">int</span> y1,TGAImage &amp;image,TGAColor color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> x =x0 ,x &lt;= x1 ;x++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">float</span> t = (x - x0) / (<span class="type">float</span>)(x1 - x0);</span><br><span class="line">		<span class="type">int</span> y = y0*(<span class="number">1.</span>-t) + y1*t;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>现在我们不用担心步长变化给直线本身带来的错误了，但还有个问题，那就是如果我们绘制一条很陡的线段，也就是 x1 - x0 很小几乎接近于0 的线段时，t增加的速度就会变得非常快，因此还是会出现分离的状况：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241108121426.png" alt="image.png"><br>              <code>1.3.2 线段——第二次尝试</code></li>
+<li>其实原因就在于x变化太快了，我们只要选择变化慢一些的算法（这本质上是一种走样）也就是使用y作为变化量即可，用选择分支来判断是否要执行这样的操作。</li>
+</ul>
+<hr>
+<h2 id="1-3-3-第三次改进——分类绘制"><a href="#1-3-3-第三次改进——分类绘制" class="headerlink" title="1.3.3 第三次改进——分类绘制"></a>1.3.3 第三次改进——分类绘制</h2><ul>
+<li>按照以上的思路，我们使用一下代码….<br><code>if (dx &gt; dy) &#123;for (int x) else &#123;for int y&#125;&#125;</code></li>
+<li>但是等一下，我们可以做的更好，实际上我们只需要写一套逻辑就够了，我们让对应的数据交换，而不是单独为其编写一套新逻辑，这样能节省我们的步骤同样是优化的一种方式。</li>
+<li>代码看起来是这样的</li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">line</span><span class="params">( <span class="type">int</span> x0, <span class="type">int</span> y0, <span class="type">int</span> x1 ,<span class="type">int</span> y1 , TGAImage &amp;image, TGAColor color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">bool</span> steep = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(std::<span class="built_in">abs</span>(x0 - x1) &lt; std::(y0 - y1))</span><br><span class="line">	&#123;</span><br><span class="line">		std::<span class="built_in">swap</span>(x0,y0);</span><br><span class="line">		std::<span class="built_in">swap</span>(x1,y1);</span><br><span class="line">		steep = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x0 &gt; x1)</span><br><span class="line">	&#123;</span><br><span class="line">		std::<span class="built_in">swap</span>(x0,x1);</span><br><span class="line">		std::<span class="built_in">swap</span>(y0,y1);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> x =x0 ,x &lt;= x1 ;x++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">float</span> t = (x - x0) / (<span class="type">float</span>)(x1 - x0);</span><br><span class="line">		<span class="type">int</span> y = y0*(<span class="number">1.</span>-t) + y1*t;</span><br><span class="line">		<span class="keyword">if</span>(steep)</span><br><span class="line">		&#123;</span><br><span class="line">			image.<span class="built_in">set</span>(y,x,color);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.<span class="built_in">set</span>(x,y,color);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>我们在上述的过程中首先对y0 - y1值与x1 - x0 值进行了判断。并根据结果考虑是否要交换其值，本质上相当于对线段进行了一次以横坐标为轴向的翻转。</li>
+<li>但翻转过后我们也得考虑是否破坏了我们原本想要的图像，因此如果x0比x1小的话，我们只需要再次将其翻转即可，后续在循环中我们只需要依据是否交换了数据来填写不同的set函数参数即可完成任意线段的绘制了。</li>
+<li>但如果你现在运行这个程序，它绘制的依然没有达到我们想要的最高速度，这是因为在循环中存在着大量的乘除法运算，它的开销在一些低端平台上很大，因此考虑到这一点，我们需要去对其进行改变，这里我们用到一个误差思想。</li>
+</ul>
+<hr>
+<h2 id="1-3-4-第四次尝试——优化乘除法与浮点数"><a href="#1-3-4-第四次尝试——优化乘除法与浮点数" class="headerlink" title="1.3.4 第四次尝试——优化乘除法与浮点数"></a>1.3.4 第四次尝试——优化乘除法与浮点数</h2><ul>
+<li>我们可以设置一个标准斜率也就是我们的k值，其叫做debugger，这个标识用于判断我们的直线是否离开了选定的范围，随后，我们用error来进行标志，每一次设置颜色就将error加上一个debugger，这很容易理解，因为回到线段的最初始定义，y &#x3D; kx + b ，每一次y增加的就是 一个k的距离，因此如果设置第二个点，偏差就应该超过这个范围了，因此y+1，随后偏移值再次减少，循环这个过程，代码修改部分是这样的：</li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dx = x1-x0; </span><br><span class="line">   <span class="type">int</span> dy = y1-y0; </span><br><span class="line">   <span class="type">float</span> derror = std::<span class="built_in">abs</span>(dy/<span class="built_in">float</span>(dx)); </span><br><span class="line">   <span class="type">float</span> error = <span class="number">0</span>; </span><br><span class="line">   <span class="type">int</span> y = y0; </span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> x=x0; x&lt;=x1; x++) &#123; </span><br><span class="line">       <span class="keyword">if</span> (steep) &#123; </span><br><span class="line">           image.<span class="built_in">set</span>(y, x, color); </span><br><span class="line">       &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">           image.<span class="built_in">set</span>(x, y, color); </span><br><span class="line">       &#125; </span><br><span class="line">       error += derror; </span><br><span class="line">       <span class="keyword">if</span> (error&gt;<span class="number">.5</span>) &#123; </span><br><span class="line">           y += (y1&gt;y0?<span class="number">1</span>:<span class="number">-1</span>); </span><br><span class="line">           error -= <span class="number">1.</span>; </span><br><span class="line">       &#125; </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>在此基础上我们依然也可以继续修改，现在的代码看起来 已经很好了，但我们还能再继续修改，因为浮点数在CPU上的开销同样比较大，因此我们可以使用整数型代替浮点型，这就要求我们需要是的这个算法对于误差感知更精准，所以我们将误差感知的范围从原来的浮点型放大为以dx代表的整数型，并以此来进行逻辑判断，其余的形式一样，这样的思想类似于数学上的放缩思想。</li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> derror2 = std::<span class="built_in">abs</span>(dy)*<span class="number">2</span>; </span><br><span class="line">    <span class="type">int</span> error2 = <span class="number">0</span>; </span><br><span class="line">    <span class="type">int</span> y = y0; </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> x=x0; x&lt;=x1; x++) &#123; </span><br><span class="line">        <span class="keyword">if</span> (steep) &#123; </span><br><span class="line">            image.<span class="built_in">set</span>(y, x, color); </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            image.<span class="built_in">set</span>(x, y, color); </span><br><span class="line">        &#125; </span><br><span class="line">        error2 += derror2; </span><br><span class="line">        <span class="keyword">if</span> (error2 &gt; dx) &#123; </span><br><span class="line">            y += (y1&gt;y0?<span class="number">1</span>:<span class="number">-1</span>); </span><br><span class="line">            error2 -= dx*<span class="number">2</span>; </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>后面两种方法只需要了解即可，我们需要关注的实际上是如何绘制线段本身，性能需求虽然也是考虑的内容，但在如今的计算平台上已经是可被忽略的改进了。至此我们第一部分线段的内容就已经完成了，下一节我们将用这个算法绘制一个苹果线框以及考虑三角形的绘制。</li>
+</ul>
+<hr>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>计算机图形学入门——3D渲染指南</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ssloy/tinyrenderer">https://github.com/ssloy/tinyrenderer</a></li>
+<li>我的项目地址：</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Pleasant233/EasyRender">https://github.com/Pleasant233/EasyRender</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/">http://example.com/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/12/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a><a class="pagination-related" href="/2025/01/12/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A67%E2%80%94%E2%80%94%E5%85%89%E6%A0%85%E5%8C%961/" title="入门图形学7——光栅化1"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">入门图形学7——光栅化1</div></div><div class="info-2"><div class="info-item-1">什么是光栅化？</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我不是在教课，我只是在贯彻费曼学习法</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-1%E7%9B%B4%E7%BA%BF%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">1.1直线的数学定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%88%E6%98%AF%E6%95%B0%E5%AD%A6"><span class="toc-number">2.1.</span> <span class="toc-text">1.1.1 为什么又是数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-2-%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E7%9B%B4%E7%BA%BF"><span class="toc-number">2.2.</span> <span class="toc-text">1.1.2 我们如何表示直线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">1.2 准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-1-%E4%BB%80%E4%B9%88%E6%98%AFTGA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1.2.1 什么是TGA格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.2.</span> <span class="toc-text">1.2.2 创建项目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-3-%E7%9B%B4%E7%BA%BF%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">1.3 直线算法实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-1-%E7%AC%AC%E4%B8%80%E7%89%88%E7%9B%B4%E7%BA%BF%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">1.3.1 第一版直线代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-2-%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95%E6%94%B9%E8%BF%9B"><span class="toc-number">4.2.</span> <span class="toc-text">1.3.2 第一次尝试改进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-3-%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%94%B9%E8%BF%9B%E2%80%94%E2%80%94%E5%88%86%E7%B1%BB%E7%BB%98%E5%88%B6"><span class="toc-number">4.3.</span> <span class="toc-text">1.3.3 第三次改进——分类绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-4-%E7%AC%AC%E5%9B%9B%E6%AC%A1%E5%B0%9D%E8%AF%95%E2%80%94%E2%80%94%E4%BC%98%E5%8C%96%E4%B9%98%E9%99%A4%E6%B3%95%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">1.3.4 第四次尝试——优化乘除法与浮点数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/12/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2025/01/12/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2025-01-12T03:44:01.890Z" title="发表于 2025-01-12 03:44:01">2025-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/" title="EasyShader——直线"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="EasyShader——直线"/></a><div class="content"><a class="title" href="/2025/01/12/EasyShader1%E2%80%94%E2%80%94%E7%9B%B4%E7%BA%BF/" title="EasyShader——直线">EasyShader——直线</a><time datetime="2025-01-12T00:00:00.000Z" title="发表于 2025-01-12 00:00:00">2025-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/12/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A67%E2%80%94%E2%80%94%E5%85%89%E6%A0%85%E5%8C%961/" title="入门图形学7——光栅化1"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学7——光栅化1"/></a><div class="content"><a class="title" href="/2025/01/12/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A67%E2%80%94%E2%80%94%E5%85%89%E6%A0%85%E5%8C%961/" title="入门图形学7——光栅化1">入门图形学7——光栅化1</a><time datetime="2025-01-12T00:00:00.000Z" title="发表于 2025-01-12 00:00:00">2025-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/21/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A66%E2%80%94%E2%80%94%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E7%BB%BC%E8%BF%B0/" title="入门图形学6——渲染管线综述"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学6——渲染管线综述"/></a><div class="content"><a class="title" href="/2024/12/21/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A66%E2%80%94%E2%80%94%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E7%BB%BC%E8%BF%B0/" title="入门图形学6——渲染管线综述">入门图形学6——渲染管线综述</a><time datetime="2024-12-21T00:00:00.000Z" title="发表于 2024-12-21 00:00:00">2024-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/14/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A65%E2%80%94%E2%80%94%E5%8F%98%E6%8D%A22/" title="入门图形学5——变换2"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学5——变换2"/></a><div class="content"><a class="title" href="/2024/12/14/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A65%E2%80%94%E2%80%94%E5%8F%98%E6%8D%A22/" title="入门图形学5——变换2">入门图形学5——变换2</a><time datetime="2024-12-14T00:00:00.000Z" title="发表于 2024-12-14 00:00:00">2024-12-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
