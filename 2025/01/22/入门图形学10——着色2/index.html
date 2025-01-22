@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>入门图形学10——着色2 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深入着色与渲染管线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门图形学10——着色2">
+<meta property="og:url" content="http://example.com/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="深入着色与渲染管线">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png">
+<meta property="article:published_time" content="2025-01-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-22T04:00:49.022Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "入门图形学10——着色2",
+  "url": "http://example.com/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/",
+  "image": "https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png",
+  "datePublished": "2025-01-22T00:00:00.000Z",
+  "dateModified": "2025-01-22T04:00:49.022Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pleasant233",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '入门图形学10——着色2',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%88%86%E4%BA%AB%E8%AF%BE%E5%A4%B4%E5%9B%BE.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">入门图形学10——着色2</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">入门图形学10——着色2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-22T00:00:00.000Z" title="发表于 2025-01-22 00:00:00">2025-01-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-22T04:00:49.022Z" title="更新于 2025-01-22 04:00:49">2025-01-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A6/">入门图形学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="10-1-着色频率"><a href="#10-1-着色频率" class="headerlink" title="10.1 着色频率"></a>10.1 着色频率</h1><ul>
+<li>上一节我们说到了一个简单的着色模型，这些着色模型是应用在一个点上的，我们叫做着色点，但不同的应用对象也会有不同的效果。</li>
+</ul>
+<hr>
+<h2 id="10-1-1-Flat着色"><a href="#10-1-1-Flat着色" class="headerlink" title="10.1.1 Flat着色"></a>10.1.1 Flat着色</h2><ul>
+<li>这种着色方式所对应的着色‘点’，实际上是一个面，我们在blender里新建一个球体，如果面数很低的话，它就会呈现出下面这种样子，可以看到着色是分块进行的，过度非常不自然，也被称为平直着色。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115160641.png" alt="image.png"><br>  <code>10.1.1 Flat着色下的球体</code></li>
+<li>说回到原因，其本质是因为，我们着色时是需要法线这个重要参数的，而Flat着色，每个面只有一个法线信息，也就是该面对应的法线，因此我们只能得到这样的效果。</li>
+</ul>
+<hr>
+<h2 id="10-1-2-Gouraud着色"><a href="#10-1-2-Gouraud着色" class="headerlink" title="10.1.2 Gouraud着色"></a>10.1.2 Gouraud着色</h2><ul>
+<li>这种着色方式相比之前的Flat着色是逐顶点的，也就是说计算每一个顶点的法线数据，以此来进行着色计算，这种计算方式要比Flat方式更加平滑，其实就是根据顶点附近的几个面的法线信息进行平均计算，最后得到这个顶点的法线值。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115161813.png" alt="image.png"><br>  <code>10.1.2 Gouraud着色下的球体</code></li>
+<li>可以看到有很明显的区别，着色明显更平滑光滑了，但我们依旧可以继续提升它，尽管此着色方式的效果已经很不错了。</li>
+</ul>
+<hr>
+<h2 id="10-1-3-Phong着色"><a href="#10-1-3-Phong着色" class="headerlink" title="10.1.3 Phong着色"></a>10.1.3 Phong着色</h2><ul>
+<li>Phong着色是逐像素的着色方式，这种着色方式应用了逐像素的插值，将每一个点的着色信息全部计算，是最光滑最均匀的着色方式，因为它已经精确到了像素。这种计算方式需要一个全新的知识——重心坐标，我们同样会讲到，现在来看看它的表现。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115162212.png" alt="image.png"><br>  <code>10.1.3 Phong着色下的球体</code></li>
+</ul>
+<hr>
+<ul>
+<li>可以看到相比上一幅图，它的明暗过度更为细腻丝滑，这是因为每一个呈现在屏幕上的像素都会被计算到，因此过度的非常自然，当然代价就是，它的计算量很大，会很消耗性能，因为在编写着色器的时候，这部分内容将被放在片元着色器中，这使得其会消耗更多的性能，本节我们将重新认识渲染管线，相信经过着色部分的学习，你应该对渲染管线有了更加深入地理解。</li>
+</ul>
+<hr>
+<h2 id="10-1-4-添加更多的面"><a href="#10-1-4-添加更多的面" class="headerlink" title="10.1.4 添加更多的面"></a>10.1.4 添加更多的面</h2><ul>
+<li>最后的效果除了着色频率带来的影响，模型本身同样不可忽视，在相同的着色状态下，一个低面数的模型效果往往比高面数的模型效果差。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115162757.png" alt="image.png"><br>  <code>10.1.4 两个同样运用Flat着色下的不同精度的球体</code></li>
+<li>但它的计算消耗也是巨大的，如果你在场景中添加过多的高面数模型，一样会消耗性能，这时就需要去均衡考虑效果，来决定使用不同的方案。</li>
+</ul>
+<hr>
+<h1 id="10-2-再谈渲染管线"><a href="#10-2-再谈渲染管线" class="headerlink" title="10.2 再谈渲染管线"></a>10.2 再谈渲染管线</h1><ul>
+<li>直至目前，我们已经完成了将物体渲染到屏幕上的最基本操作，我们得到了一个有着基本亮暗面的模型，下面我们来回顾一下我们都做了些什么。</li>
+</ul>
+<hr>
+<h1 id="10-2-1-顶点变换部分"><a href="#10-2-1-顶点变换部分" class="headerlink" title="10.2.1 顶点变换部分"></a>10.2.1 顶点变换部分</h1><ul>
+<li>首先，我们在一开始从点入手，了解了顶点是如何经过一系列变换最终变换到屏幕视口坐标下的，这为我们的一切提供了基础。这是管线的第一部分。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115164847.png" alt="image.png"><br>  <code>10.2.1 渲染管线顶点变换部分</code></li>
+</ul>
+<hr>
+<h2 id="10-2-2-三角形部分"><a href="#10-2-2-三角形部分" class="headerlink" title="10.2.2 三角形部分"></a>10.2.2 三角形部分</h2><ul>
+<li>随后，我们将对应的顶点运用算法，将其绘制为三角形片元，作为一切的基础绘制，之后我们开始了光栅化阶段，我们运用了深度缓冲等技术，解决了物体映射到屏幕上的先后顺序，成功绘制了一个带面的模型（如果你跟随实践的话）。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115165424.png" alt="image.png"><br>  <code>10.2.2 渲染管线三角形光栅化阶段</code></li>
+</ul>
+<hr>
+<h2 id="10-2-3-逐片元操作部分"><a href="#10-2-3-逐片元操作部分" class="headerlink" title="10.2.3 逐片元操作部分"></a>10.2.3 逐片元操作部分</h2><ul>
+<li>随后便是我们的着色部分，这一部分我们真正赋予了三角形模型灵魂，我们给予了它明暗面的变化，并且了解了着色模型的着色方式，知道了一个很简单的着色模型，布林冯模型，并将其应用在了我们的模型之上。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241115170055.png" alt="image.png"><br>  <code>10.2.3 基本的渲染管线概览</code></li>
+</ul>
+<hr>
+<h2 id="10-2-4-概述"><a href="#10-2-4-概述" class="headerlink" title="10.2.4 概述"></a>10.2.4 概述</h2><ul>
+<li>至此我们从头至尾大概了解了什么是渲染管线（渲染流水线），并跟随实践了其中一些内容，完成了一个最简单的软光栅渲染器（它真的很简单）。我们了解了每个步骤都做了些什么，正如我之前所说，其中有些部分是可配置的，有些则是可编程的。用于编程他们的语言就是所谓Shader语言，着色语言，比如大家从基础课一开始认识坐标系时就了解到的OPenGL的GLSL，DX的HLSL以及CG，都是作为编程语言编写Shader使用的。</li>
+<li>我们用它来对渲染管线中我们希望定义的部分进行编写。这就催生了两个最常用且应该是必备的着色器阶段。它们分别是VertexShader（顶点着色器），FragmentShader（片元着色器）。</li>
+<li>讲到这里，我们终于可以来看一下我们的代码了，相信我，很想跟大家分享这部分，我们可以开始干活了！</li>
+</ul>
+<hr>
+<h2 id="10-2-5-一个简单的顶点着色器"><a href="#10-2-5-一个简单的顶点着色器" class="headerlink" title="10.2.5 一个简单的顶点着色器"></a>10.2.5 一个简单的顶点着色器</h2><ul>
+<li>后续会有专题文章分享着色器语言的编程学习，这里只作为认识，介绍一下着色器是什么。</li>
+<li>首先一个基本的着色器需要有基本的输入，这也叫做参数，在我最常写的CG语言之上的ShaderLab中，你需要在Shader中声明你传入的变量，它可以是浮点型（注意Shader中一般只有浮点型作为数字变量类型），2D纹理，颜色值等等。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_Color(&quot;MainColor&quot;, Color) = (1,1,1,1)</span><br><span class="line">_Float1(&quot;Float_1&quot;,Float) = 0.1</span><br><span class="line">_Float2(&quot;Float_2&quot;,Range(0,1)) =0.5</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样就声明了一个变量，当然在GLSL中你得这么写</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uniform</span> <span class="type">float</span> Float_1;</span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec4</span> Color;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>随后，你就可以在你的着色器中计算了。</li>
+</ul>
+<hr>
+<ul>
+<li>在着色器计算部分，你可以将其理解为一个函数体，它有参数也有返回值，不同的语言定义的着色器都不同，我们这里还是展示两种最主流语言的书写方式。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct a2v&#123;</span><br><span class="line">	float4 vertex : POSITION;</span><br><span class="line">	float3 normal : NORMAL;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line">struct v2f&#123;</span><br><span class="line">	float4 pos : SV_POSITION;</span><br><span class="line">	float3 texcoord : TEXCOORD;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>首先，在Shaderlab中的CG风格语法中，我们首先需要定义结构体，这个结构体正如其名，是用来在两个着色器之间传递参数的。</li>
+</ul>
+<hr>
+<ul>
+<li>随后我们就可以定义着色器代码了，顶点着色器需要使用v2f类型，这是因为其返回值应为传递给片元着色器的返回值类型，而其参数则为a2v 对象。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v2f vert(a2v v)</span><br><span class="line">&#123;</span><br><span class="line">	v2f o;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>GLSL中则一般片元着色器和顶点着色器分开，并定义统一的传入传出标识符。</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">out</span> <span class="type">vec2</span> fragUV;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">gl_Position</span> = <span class="type">vec4</span>(pos,<span class="number">1.0</span>);</span><br><span class="line">	fragUV = <span class="type">vec2</span>(uv.x,<span class="number">1.0</span>-uv.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>片元着色器部分与顶点着色器类似，只不过这部分是真正向外输出的部分，因此返回的就不是结构体类型，而是颜色了。之后会单独出详细的文章分享，接下来让我们关注另一个重要的问题，我们该如何处理逐像素的颜色？换种说法，我们该如何呈现纹理？</li>
+</ul>
+<hr>
+<h1 id="10-3-纹理UV与重心坐标"><a href="#10-3-纹理UV与重心坐标" class="headerlink" title="10.3 纹理UV与重心坐标"></a>10.3 纹理UV与重心坐标</h1><ul>
+<li>经过前文的介绍，在着色时，有一项参数我们其实并没有说清楚，那就是漫反射系数，在实际的游戏，场景之中，漫反射系数在每一个材质的每一个点上其实都是不一样的，而定义它的方式，实际上就是用纹理贴图来定义，接下来我们来看纹理贴图的概念。</li>
+</ul>
+<hr>
+<h2 id="10-3-1-纹理贴图基础概念"><a href="#10-3-1-纹理贴图基础概念" class="headerlink" title="10.3.1 纹理贴图基础概念"></a>10.3.1 纹理贴图基础概念</h2><ul>
+<li>为什么会出现纹理贴图，这是由于对画面表达的丰富度与便捷性的结合而催生出的产物，纹理贴图可以快速的记录一组参数数据，并以直观的图像形式呈现，便于复用扩展修改</li>
+</ul>
+<hr>
+<ul>
+<li>纹理贴图实际上就是一张图片，其本身通过一系列操作映射到物体表面。纹理贴图有很多种类，包括但不限于漫反射贴图，法线贴图，粗糙度贴图，环境光遮蔽贴图，高光贴图，视差贴图等等。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241116193709.png" alt="image.png"><br>  <code>10.3.1 一组纹理图像</code></li>
+<li>那么纹理图像是如何映射到模型上的呢？这就需要提到其中的操作，便是纹理映射，纹理映射自然需要坐标去描述，这就是我们常常听到的UV坐标。</li>
+</ul>
+<hr>
+<ul>
+<li>UV坐标是一组二维坐标，其数值范围是0-1，不论纹理图像本身大小如何，我们都会用这个区间去描述它，相当于你可以理解为纹理图像是面料，但最后穿在身上的才是衣服，而如何穿着在身上就纹理映射的过程。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241116200029.png" alt="image.png"><br>  <code>10.3.1.2 纹理坐标图</code></li>
+</ul>
+<hr>
+<ul>
+<li>从这张图可以看到，颜色对应的是绿色和红色，为什么是这两种颜色呢？前面我们提到RGB颜色中我们将其表示为0-1之间的数值，所以三个值分别对应的就是红绿蓝。因此在这个范围内，我们可以发现它便是红绿两色的混合值。</li>
+<li>我们用这个坐标进行纹理的映射，但这个坐标是建立在模型空间之上的，我们利用一些方法去将模型空间坐标对应在这张纹理坐标上，然后去寻找该点在纹理图像上对应的纹理值</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241116211152.png" alt="image.png"><br>  <code>10.3.1.3 纹理映射的过程</code></li>
+<li>因此实际上纹理坐标只是便于平铺纹理的工具，我们会在很多DCC软件中捡到纹理坐标的应用，也就是我们所说的展UV的过程，实际上就是将贴图与模型上的点进行对应，中间的桥梁叫做纹理坐标。讲到这里各位应该大概明白是什么意思了吧，很不直观，不过现在如果再去软件中操作一下，应该会有不一样的体会</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241116211639.png" alt="image.png"><br>  <code>10.3.1.4 Blender中的UV编辑</code></li>
+<li>大家可以看到上图之中，实际上我们选择的是苹果上表面的顶点，其在左侧UV坐标中对应的区域就是我们现在所看到的样子，很直观的可以体会到实际上物体的顶点是与材质如此一一对应的。</li>
+</ul>
+<hr>
+<h2 id="10-3-2-重心坐标"><a href="#10-3-2-重心坐标" class="headerlink" title="10.3.2 重心坐标"></a>10.3.2 重心坐标</h2><ul>
+<li>重心坐标是用三角形三个顶点来描述三角形内任意一点的方式。</li>
+<li>三角形内任意一点都可以用重心坐标来表示，重心坐标由三角形三点乘以三个系数来表示，且这三个系数和为1</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118083355.png" alt="image.png"><br>  <code>10.3.2 重心坐标</code></li>
+</ul>
+<hr>
+<ul>
+<li>那么如何求这三个系数呢？我们可以利用三角形面积关系来表示。</li>
+<li>三个系数所对应的面积是其对边所成三角形的面积，用这个面积作为分子与整个分母面积相除，得到的就是系数。</li>
+<li>而且我们也可以只计算两个值，由定义求出第三个值。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118083831.png" alt="image.png"><br>  <code>10.3.2.1 重心坐标系数表示方法</code></li>
+</ul>
+<hr>
+<h2 id="10-3-3-重心坐标的应用——插值"><a href="#10-3-3-重心坐标的应用——插值" class="headerlink" title="10.3.3 重心坐标的应用——插值"></a>10.3.3 重心坐标的应用——插值</h2><ul>
+<li>先前我们提到，我们想通过一些手段得到一个片元上每一个像素的颜色值，这就需要我们使用纹理。而纹理覆盖在每一个片元上的方式，就是插值。重心坐标就是一种插值手段。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118084852.png" alt="image.png"><br>  <code>10.3.3 重心坐标的应用</code></li>
+<li>但是重心坐标同样存在问题，那就是可能在投影变化下出错，因为在三维空间中使用二维的重心坐标容易出现错误，所以我们应该在三维空间下插值后再去映射到二维坐标。</li>
+</ul>
+<hr>
+<h2 id="10-3-4-纹理的放大与优化"><a href="#10-3-4-纹理的放大与优化" class="headerlink" title="10.3.4 纹理的放大与优化"></a>10.3.4 纹理的放大与优化</h2><ul>
+<li>纹素（Texel——texture pixel）也被成为纹理元素，其是纹理空间中的基本单位，也是我们在查找纹理颜色时搜索的基本单位。</li>
+<li>在纹理放大时我们就需要通过在纹素上做文章来尽量减少因为多个纹素同时映射在同一个像素内而导致的图片模糊问题，由此我们得出了我们的优化方法——双线性差值法。</li>
+</ul>
+<hr>
+<h2 id="10-3-5-双线性差值（Bilinear-Interpolation）"><a href="#10-3-5-双线性差值（Bilinear-Interpolation）" class="headerlink" title="10.3.5 双线性差值（Bilinear Interpolation）"></a>10.3.5 双线性差值（Bilinear Interpolation）</h2><ul>
+<li>在了解双线性插值前，我们首先要先了解线性插值，线性插值是什么呢？如果从数学上定义很像我们画一条直线的方法。画一条直线的时候我们需要知道斜率，而如果知道斜率实际上就等于我们知道了这条线的走向，就是说我们可以定义这条线上任意一点的值。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118091029.png" alt="image.png"><br>  <code>10.3.5 线性插值</code></li>
+</ul>
+<hr>
+<ul>
+<li>但在图形学应用中实际上我们可以将其抽象为占比表示，这也是很多真实应用时的方法，我们定义</li>
+<li>lerp（x,v0,v1）&#x3D; v0 + x(v1 - v0)</li>
+<li>这样我们就可以表示v0到v1这条线段上任意一点了。</li>
+<li>正如前文所说，我们应用线性插值的目的在于解决在低像素情况下任意一点所对应纹素值的问题。因此我们就可以使用这个插值方法，先找到临近的四个像素中心，随后对其进行插值，因为t，s长度均为1，实际上就是一个百分比计算</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118091524.png" alt="image.png"><br>  <code>10.3.6 双线性差值——1</code></li>
+</ul>
+<hr>
+<ul>
+<li>接着，由上述操作我们可以得到u1，u2，它们分别是对上下两组像素坐标进行插值得到的结果。随后就要体现我们的‘双’线性插值了。我们将再对这两个值在竖直方向上做插值，最后就能得到对应的我们想要的任何一点的值了。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241118091749.png" alt="image.png"><br>  <code>10.3.7 双线性差值——2</code></li>
+</ul>
+<hr>
+<ul>
+<li>至此我们就完成了双线性差值的操作，它可以优化低面数模型上的纹理表现效果，让纹理过渡更丝滑清晰，当然我们还可以对更多的像素进行插值，这也被称为三线性插值或三立方插值，大家可以通过下文了解。</li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8C%E4%B8%89%E6%AC%A1%E6%8F%92%E5%80%BC">https://zh.wikipedia.org/wiki/%E5%8F%8C%E4%B8%89%E6%AC%A1%E6%8F%92%E5%80%BC</a></li>
+</ul>
+<hr>
+<h2 id="10-3-5-过大的纹理带来的问题"><a href="#10-3-5-过大的纹理带来的问题" class="headerlink" title="10.3.5 过大的纹理带来的问题"></a>10.3.5 过大的纹理带来的问题</h2><ul>
+<li>前文我们讨论了如果一个纹理比对应的像素小，该如何优化其显示，接下来我们来看反之的情况，若过大的问题映射在小像素中呢？</li>
+<li>下面这幅图像，右图我们可以看到，远处得到纹理出现了摩尔纹，希望你还记得摩尔纹的概念，摩尔纹就是走样的一种形式，说明我们的图像出现了走样，可为何会出现走样呢？</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119085025.png" alt="image.png"><br>  <code>10.3.5 大纹理映射在屏幕上出现了摩尔纹</code></li>
+</ul>
+<hr>
+<ul>
+<li>这就要回顾我们之前提到的走样的概念，走样就是高频信息的叠加，就是采样频率慢于纹理变化频率。解决方法我们当时也提出了，那就是增加采样率的诸多方法，其中最有代表性的就是MSAA。希望你还记得。</li>
+<li>分析之后我们就可以得出一个简单的解决方案，那就是使用算法进行超采样。但换来的却是庞大的数据开销，会严重影响性能。所以我们还要讨论别的解决方案，这就引出了一个非常重要的概念，那就是范围查询。</li>
+<li>我们先前讨论的都是点查询，何谓点查询，其实就是聚焦于每一个点上的属性，我们之前聚焦的是采样点，而现在，我们需要快速得出一片纹理范围内对应的像素属性，这时候，就需要使用范围查询优化性能了，其中最具代表性的方式就是MIPMAP，也叫多级纹理。</li>
+</ul>
+<hr>
+<h2 id="10-3-6-MIPMAP"><a href="#10-3-6-MIPMAP" class="headerlink" title="10.3.6 MIPMAP"></a>10.3.6 MIPMAP</h2><ul>
+<li>MipMap这个概念其实在引擎使用之中或多或少大家可能都看见过，比如如果你在Unity打开一个纹理对象，它的面板中就会有这一选项。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119091646.png" alt="image.png"><br>  <code>10.3.6 Unity面板中的MIPMAP视窗</code></li>
+</ul>
+<hr>
+<ul>
+<li>MipMap顾名思义，就是小纹理的意思。为了解决范围查询问题，我们将一张纹理上任意相邻像素求其平均并缩放到新一级纹理的一个纹素上，这样。最终我们一定会得到一张单个像素的纹理值（如果其符合方形并且是2的指数次方的像素数的话）</li>
+<li>MIPMAP会由引擎自行生成，而其所占内存总量仅为原本原图的4&#x2F;3倍，这是个级数求和问题，最后得出仅仅会多占1&#x2F;3的空间，是一个非常好的算法。</li>
+<li>而我们该如何将像素对应到纹素并进行查询呢？</li>
+</ul>
+<hr>
+<ul>
+<li>首先，我们先在对应片元上寻找我们感兴趣的点，接着，需要将其映射到Uv坐标下，这个过程其实是在求对应像素的偏导值，在此之后我们就能在对应的UV坐标下获取这个片元像素对应的范围了。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119092203.png" alt="image.png"><br>  <code>10.3.6.1 像素映射UV坐标的过程</code></li>
+</ul>
+<hr>
+<ul>
+<li>接着，我们该如何获取这个区域的颜色呢？这就需要我们找到对应的MIPMAP，现在需要一点数学知识。我们知道每一级是上一级对应的两个像素之和，因此共有log2N级MIPMAP，我们只需要去找对应的矩形范围在哪一级变为一个像素范围即可，因此可以得出以下公式：</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119092815.png" alt="image.png"><br>  <code>10.3.6.2 MIPMAP层级对应公式</code></li>
+<li>现在我们就可以查找任意像素对应的颜色范围了，因为最终都会对应到一张MIPMAP只需要获取对应的颜色即可。</li>
+</ul>
+<hr>
+<ul>
+<li>我们还能继续优化吗？当然可以，现在我们只有10张图，肯定无法满足所有情况下的查找，如果像素覆盖范围在两张图之间，我们该如何取舍？这时候就要继续用到我们先前所学的概念，那就是插值。</li>
+<li>这次我们要对两张MIPMAP进行插值。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119093331.png" alt="image.png"><br>  <code>10.3.6.3 三线性插值</code></li>
+</ul>
+<hr>
+<h2 id="10-3-7-各向异性过滤"><a href="#10-3-7-各向异性过滤" class="headerlink" title="10.3.7 各向异性过滤"></a>10.3.7 各向异性过滤</h2><ul>
+<li>前文所提到了三线性插值，虽然能够获得一个较为平滑的过度，但仍然无法解决一些问题，比如如果一个区域被拉伸为长方形而不是正方向，就无法查询了。这时就会诞生出一个新的解决方法，那就是各向异性过滤。</li>
+<li>各向异性过滤在游戏中有广泛的应用，它的原理实际上很简单，就是通过按不同比率压缩图像，实际上这也叫做RipMap</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119094517.png" alt="image.png"><br>  <code>10.3.7 各向异性过滤RIpMAP</code></li>
+</ul>
+<hr>
+<ul>
+<li>而在引擎中，实际上我们并不是这样做的，因为这样做会消耗很大的内存空间，我们会仍然复用MIPMAP，但这时我们会用同区域的最短边区域查找对应的MIPMAP层级，并沿着各向异性的方向多次采样，这里调节的采样倍数，就是采样次数，这样我们就可以以同样的内存代价获得与RIpMap一样的结果</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119095440.png" alt="image.png"><br>  <code>10.3.7.1 引擎中的采样方案</code></li>
+</ul>
+<hr>
+<h2 id="10-3-8-其他的查询方法"><a href="#10-3-8-其他的查询方法" class="headerlink" title="10.3.8 其他的查询方法"></a>10.3.8 其他的查询方法</h2><ul>
+<li>积分图 利用积分生成各个区域的积分值，并利用算法查找对应的平均值，SAT</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119094935.png" alt="image.png"><br>  <code>10.3.8 SAT 积分图</code></li>
+</ul>
+<hr>
+<h2 id="10-3-9-纹理的优化区间"><a href="#10-3-9-纹理的优化区间" class="headerlink" title="10.3.9 纹理的优化区间"></a>10.3.9 纹理的优化区间</h2><ul>
+<li>在业界，我们优化的目标是尽量降低DrawCall，希望你还记得它是CPU向GPU发送指令的方式。</li>
+<li>我们会将纹理合并为纹理图集，通过使用不同的采样坐标来采样对应的图片，同样我们也可以将纹理放入一个数组之中，这一样可以减少DRAWCALL降低开销。</li>
+</ul>
+<hr>
+<h1 id="10-4-一些常用纹理"><a href="#10-4-一些常用纹理" class="headerlink" title="10.4 一些常用纹理"></a>10.4 一些常用纹理</h1><ul>
+<li>这部分是简单扼要的介绍，主要介绍一下一些在美术和引擎中常用的纹理。</li>
+</ul>
+<h2 id="10-4-1-反射率or漫反射纹理"><a href="#10-4-1-反射率or漫反射纹理" class="headerlink" title="10.4.1 反射率or漫反射纹理"></a>10.4.1 反射率or漫反射纹理</h2><ul>
+<li>这种纹理是提供颜色的基础纹理，我们可以用这种纹理为图像提供基本的颜色。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119100252.png" alt="image.png"><br>  <code>10.4.1 反射率or漫反射纹理</code></li>
+</ul>
+<hr>
+<h2 id="10-4-2-凹凸纹理与法线纹理"><a href="#10-4-2-凹凸纹理与法线纹理" class="headerlink" title="10.4.2 凹凸纹理与法线纹理"></a>10.4.2 凹凸纹理与法线纹理</h2><ul>
+<li>凹凸纹理只记录了每个像素突出的大小，而且这种计算并不能真正改变顶点高度，只能让顶点看起来这样，这是因为它改变了纹理着色的数值，因此会使得不同区域呈现出不同的质感。</li>
+</ul>
+<hr>
+<ul>
+<li>我们可以在一条线身上来看这个问题，原本的这条直线的法线方向是竖直向上的，而如果增加了凹凸贴图，计算时就会改变该点的法线方向。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241120082554.png" alt="image.png"><br>  <code>10.4.2 bump贴图改变表面法线的原理</code></li>
+<li>这样表面法线的数据就被改变了，因此根据我们之前计算漫反射的方法，物体表面就会出现凹凸感。</li>
+</ul>
+<hr>
+<ul>
+<li>法线纹理则实质上使得纹理向不同方向进行突出，不过它仍然无法改变突出大小，但我们可以利用它改变顶点位置。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119100617.png" alt="image.png"><br>  <code>10.4.2.1 加入了基础的凹凸纹理</code></li>
+</ul>
+<hr>
+<h2 id="10-4-3-遮蔽纹理"><a href="#10-4-3-遮蔽纹理" class="headerlink" title="10.4.3 遮蔽纹理"></a>10.4.3 遮蔽纹理</h2><ul>
+<li>这类纹理一般是用来定制一些特殊效果，比如高光遮蔽纹理，环境光遮蔽纹理等，都是用来提供不同的质感。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241119100935.png" alt="image.png"><br>  <code>10.4.3 加入了基础的高光遮蔽纹理</code></li>
+</ul>
+<hr>
+<h2 id="10-4-4-环境光"><a href="#10-4-4-环境光" class="headerlink" title="10.4.4 环境光"></a>10.4.4 环境光</h2><ul>
+<li>我们之前一直回避的一个问题，那就是环境光。环境光虽然看起来很简单，不就是环境给物体的映射吗，实际上环境光的计算并不简单，反而是光栅化中最困难的部分，因为我们要获取整个场景的反射，这就是环境光照，动态环境光技术也是图形学前沿一直在努力的话题。现在我们来看一下我们如何巧妙地得到环境光。</li>
+</ul>
+<hr>
+<ul>
+<li>光栅化中，我们尽量减少计算，因此我们更希望通过内存来换取性能的节省，因此，我们往往使用一张环境光贴图来为所有物体提供光照采样。比如Unity中的天空盒子以及UE中的天空光照，实际上就是干的这件事。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/10.4.4Ambient.png" alt="10.4.4Ambient.png"><br>  <code>10.4.4 Ue天空光照开启与关闭对比</code></li>
+<li>可以看到开启环境光之后，整个环境明显变亮很多，细节更加丰富了。</li>
+</ul>
+<hr>
+<h2 id="10-4-5-HDR与HDRI"><a href="#10-4-5-HDR与HDRI" class="headerlink" title="10.4.5 HDR与HDRI"></a>10.4.5 HDR与HDRI</h2><ul>
+<li>首先我们要区分HDR和HDRI的区别。HDR叫做高动态范围，什么是动态范围？</li>
+<li>动态范围是指一张图片中最亮处与最暗处之比。亮部和暗部范围可以非常大。之前我们提到我们使用256种不同的亮度来表现环境。而HDR可以让我们很方便的尽可能记录更多的光照变化。</li>
+<li>用NVIDIA的总结来说：HDR可以让亮部更亮，暗部更暗</li>
+<li>我们可以用HDRI图像来模拟环境光照，往往能得到更加真实的结果。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/indoor.png" alt="indoor.png"><br>  <code>10.4.5 blender中HDRI贴图转模型的实例</code></li>
+</ul>
+<hr>
+<ul>
+<li>至此为止，我们基本上介绍了在光栅化中着色的各类技术，但这只是部分，如果你想进一步了解，欢迎浏览下方的参考资料与网站，我们下一节将来看看渲染中的几何部分。</li>
+</ul>
+<hr>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>计算机图形学入门——3D渲染指南       GabrielGambetta著 贾凡译</li>
+<li>games101图形学入门——闫令琪 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744">https://www.bilibili.com/video/BV1X7411F744</a></li>
+<li>技术美术百人计划——霜狼may等 <a target="_blank" rel="noopener" href="https://learn.u3d.cn/tutorial/technical-artist-may">https://learn.u3d.cn/tutorial/technical-artist-may</a></li>
+<li>UnityShader入门精要——冯乐乐著</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/">http://example.com/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/17/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A69%E2%80%94%E2%80%94%E7%9D%80%E8%89%B21/" title="入门图形学9——着色1"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">入门图形学9——着色1</div></div><div class="info-2"><div class="info-item-1">开始进行着色</div></div></div></a><a class="pagination-related" href="/2025/01/22/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我不是在教课，我只是在贯彻费曼学习法</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#10-1-%E7%9D%80%E8%89%B2%E9%A2%91%E7%8E%87"><span class="toc-number">1.</span> <span class="toc-text">10.1 着色频率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-1-Flat%E7%9D%80%E8%89%B2"><span class="toc-number">1.1.</span> <span class="toc-text">10.1.1 Flat着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-2-Gouraud%E7%9D%80%E8%89%B2"><span class="toc-number">1.2.</span> <span class="toc-text">10.1.2 Gouraud着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-3-Phong%E7%9D%80%E8%89%B2"><span class="toc-number">1.3.</span> <span class="toc-text">10.1.3 Phong着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-4-%E6%B7%BB%E5%8A%A0%E6%9B%B4%E5%A4%9A%E7%9A%84%E9%9D%A2"><span class="toc-number">1.4.</span> <span class="toc-text">10.1.4 添加更多的面</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-2-%E5%86%8D%E8%B0%88%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF"><span class="toc-number">2.</span> <span class="toc-text">10.2 再谈渲染管线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-2-1-%E9%A1%B6%E7%82%B9%E5%8F%98%E6%8D%A2%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">10.2.1 顶点变换部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-2-%E4%B8%89%E8%A7%92%E5%BD%A2%E9%83%A8%E5%88%86"><span class="toc-number">3.1.</span> <span class="toc-text">10.2.2 三角形部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-3-%E9%80%90%E7%89%87%E5%85%83%E6%93%8D%E4%BD%9C%E9%83%A8%E5%88%86"><span class="toc-number">3.2.</span> <span class="toc-text">10.2.3 逐片元操作部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-4-%E6%A6%82%E8%BF%B0"><span class="toc-number">3.3.</span> <span class="toc-text">10.2.4 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-5-%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8"><span class="toc-number">3.4.</span> <span class="toc-text">10.2.5 一个简单的顶点着色器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-3-%E7%BA%B9%E7%90%86UV%E4%B8%8E%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87"><span class="toc-number">4.</span> <span class="toc-text">10.3 纹理UV与重心坐标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-1-%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">10.3.1 纹理贴图基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-2-%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87"><span class="toc-number">4.2.</span> <span class="toc-text">10.3.2 重心坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-3-%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E6%8F%92%E5%80%BC"><span class="toc-number">4.3.</span> <span class="toc-text">10.3.3 重心坐标的应用——插值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-4-%E7%BA%B9%E7%90%86%E7%9A%84%E6%94%BE%E5%A4%A7%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">4.4.</span> <span class="toc-text">10.3.4 纹理的放大与优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-5-%E5%8F%8C%E7%BA%BF%E6%80%A7%E5%B7%AE%E5%80%BC%EF%BC%88Bilinear-Interpolation%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">10.3.5 双线性差值（Bilinear Interpolation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-5-%E8%BF%87%E5%A4%A7%E7%9A%84%E7%BA%B9%E7%90%86%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.6.</span> <span class="toc-text">10.3.5 过大的纹理带来的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-6-MIPMAP"><span class="toc-number">4.7.</span> <span class="toc-text">10.3.6 MIPMAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-7-%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7%E8%BF%87%E6%BB%A4"><span class="toc-number">4.8.</span> <span class="toc-text">10.3.7 各向异性过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-8-%E5%85%B6%E4%BB%96%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="toc-number">4.9.</span> <span class="toc-text">10.3.8 其他的查询方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-9-%E7%BA%B9%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96%E5%8C%BA%E9%97%B4"><span class="toc-number">4.10.</span> <span class="toc-text">10.3.9 纹理的优化区间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-4-%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%BA%B9%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">10.4 一些常用纹理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-1-%E5%8F%8D%E5%B0%84%E7%8E%87or%E6%BC%AB%E5%8F%8D%E5%B0%84%E7%BA%B9%E7%90%86"><span class="toc-number">5.1.</span> <span class="toc-text">10.4.1 反射率or漫反射纹理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-2-%E5%87%B9%E5%87%B8%E7%BA%B9%E7%90%86%E4%B8%8E%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86"><span class="toc-number">5.2.</span> <span class="toc-text">10.4.2 凹凸纹理与法线纹理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-3-%E9%81%AE%E8%94%BD%E7%BA%B9%E7%90%86"><span class="toc-number">5.3.</span> <span class="toc-text">10.4.3 遮蔽纹理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-4-%E7%8E%AF%E5%A2%83%E5%85%89"><span class="toc-number">5.4.</span> <span class="toc-text">10.4.4 环境光</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-5-HDR%E4%B8%8EHDRI"><span class="toc-number">5.5.</span> <span class="toc-text">10.4.5 HDR与HDRI</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/22/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2025/01/22/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2025-01-22T04:00:49.022Z" title="发表于 2025-01-22 04:00:49">2025-01-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/" title="入门图形学10——着色2"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学10——着色2"/></a><div class="content"><a class="title" href="/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/" title="入门图形学10——着色2">入门图形学10——着色2</a><time datetime="2025-01-22T00:00:00.000Z" title="发表于 2025-01-22 00:00:00">2025-01-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/17/EasyShader3%E2%80%94%E2%80%94%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BB%A5%E5%8F%8A%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2/" title="EasyShader——重心坐标检测以及深度缓冲"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="EasyShader——重心坐标检测以及深度缓冲"/></a><div class="content"><a class="title" href="/2025/01/17/EasyShader3%E2%80%94%E2%80%94%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BB%A5%E5%8F%8A%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2/" title="EasyShader——重心坐标检测以及深度缓冲">EasyShader——重心坐标检测以及深度缓冲</a><time datetime="2025-01-17T00:00:00.000Z" title="发表于 2025-01-17 00:00:00">2025-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/17/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A69%E2%80%94%E2%80%94%E7%9D%80%E8%89%B21/" title="入门图形学9——着色1"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学9——着色1"/></a><div class="content"><a class="title" href="/2025/01/17/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A69%E2%80%94%E2%80%94%E7%9D%80%E8%89%B21/" title="入门图形学9——着色1">入门图形学9——着色1</a><time datetime="2025-01-17T00:00:00.000Z" title="发表于 2025-01-17 00:00:00">2025-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/15/EasyShader2%E2%80%94%E2%80%94%E7%BA%BF%E6%A1%86%E4%B8%8E%E4%B8%89%E8%A7%92%E5%BD%A2/" title="EasyShader——线框与三角形"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="EasyShader——线框与三角形"/></a><div class="content"><a class="title" href="/2025/01/15/EasyShader2%E2%80%94%E2%80%94%E7%BA%BF%E6%A1%86%E4%B8%8E%E4%B8%89%E8%A7%92%E5%BD%A2/" title="EasyShader——线框与三角形">EasyShader——线框与三角形</a><time datetime="2025-01-15T00:00:00.000Z" title="发表于 2025-01-15 00:00:00">2025-01-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
