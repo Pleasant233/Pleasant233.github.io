@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>入门图形学11——几何 | Pleasant233</title><meta name="author" content="Pleasant233"><meta name="copyright" content="Pleasant233"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="图形学中几何数据的处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门图形学11——几何">
+<meta property="og:url" content="http://example.com/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/index.html">
+<meta property="og:site_name" content="Pleasant233">
+<meta property="og:description" content="图形学中几何数据的处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png">
+<meta property="article:published_time" content="2025-01-24T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-24T04:36:49.545Z">
+<meta property="article:author" content="Pleasant233">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "入门图形学11——几何",
+  "url": "http://example.com/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/",
+  "image": "https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png",
+  "datePublished": "2025-01-24T00:00:00.000Z",
+  "dateModified": "2025-01-24T04:36:49.545Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pleasant233",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '入门图形学11——几何',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%88%86%E4%BA%AB%E8%AF%BE%E5%A4%B4%E5%9B%BE.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Pleasant233</span></a><a class="nav-page-title" href="/"><span class="site-name">入门图形学11——几何</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> Animations</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">入门图形学11——几何</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-24T00:00:00.000Z" title="发表于 2025-01-24 00:00:00">2025-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-24T04:36:49.545Z" title="更新于 2025-01-24 04:36:49">2025-01-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A6/">入门图形学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="11-1-几何的应用"><a href="#11-1-几何的应用" class="headerlink" title="11.1 几何的应用"></a>11.1 几何的应用</h1><ul>
+<li>我们之前用三角形代替几何图元，这是一种很简单而基础的表示方法，但在真实世界里，很明显我们并不能用这一种简单的图形表示所有的几何形状，因此本节我们将来看一看几何方面诸多的表示方法与应用。</li>
+</ul>
+<hr>
+<h2 id="11-1-1-复杂曲面"><a href="#11-1-1-复杂曲面" class="headerlink" title="11.1.1 复杂曲面"></a>11.1.1 复杂曲面</h2><ul>
+<li>几何方面表示的其中一个典型例子就是复杂的曲面，比如赛车游戏中光滑的汽车模型，就不单是用三角形来进行近似表示了。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Forza%20Horizon%204%20Screenshot%202024.09.30%20-%2021.43.24.91.png" alt="Forza Horizon 4 Screenshot 2024.09.30 - 21.43.24.91.png"><br>  <code>11.1.1 复杂曲面的例子——地平线4</code></li>
+</ul>
+<hr>
+<h2 id="11-1-2-毛发渲染"><a href="#11-1-2-毛发渲染" class="headerlink" title="11.1.2 毛发渲染"></a>11.1.2 毛发渲染</h2><ul>
+<li>毛发渲染同样十分需要几何层面的知识与优化，因为其数量巨大，而渲染与存储它更是业界一直在探寻的难题。</li>
+<li>通过一些手段我们可以更加顺滑优化地表示它。最典型的毛发渲染就是最终幻想系列。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/b12fdeb36461e71fd69571f940c64538.jpg" alt="b12fdeb36461e71fd69571f940c64538.jpg"><br>  <code>11.1.2 复杂的毛发渲染例子——最终幻想15</code></li>
+</ul>
+<hr>
+<h2 id="11-1-3-几何体优化"><a href="#11-1-3-几何体优化" class="headerlink" title="11.1.3 几何体优化"></a>11.1.3 几何体优化</h2><ul>
+<li>对于场景中大量的几何体聚集的情况，我们也需要通过各式各样的方法进行优化，最耳熟能详的应该是LOD技术</li>
+<li>这个技术与前文提到过的MIPMAP技术结合使用可以得到很好的性能优化与画面权衡表现的作用，经典的例子就是漫威蜘蛛侠中城市场景。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/1817070_1.jpg" alt="1817070_1.jpg"><br>  <code>11.1.3 几何体优化的例子——漫威蜘蛛侠1</code></li>
+</ul>
+<hr>
+<h1 id="11-2-几何的表示方法"><a href="#11-2-几何的表示方法" class="headerlink" title="11.2 几何的表示方法"></a>11.2 几何的表示方法</h1><ul>
+<li>几何的表示分为显式与隐式。</li>
+</ul>
+<hr>
+<h2 id="11-2-1-隐式的表示"><a href="#11-2-1-隐式的表示" class="headerlink" title="11.2.1 隐式的表示"></a>11.2.1 隐式的表示</h2><ul>
+<li>隐式表示实际上是一种判断方法，满足该条件的点就都可以存在。</li>
+<li>而一般也是以数学公式体现的，比如大家高中学过的点线面的公式，再比如我们会在高数中学到的体的公式，它不告诉我们具体的位置，我们可以将其理解为一种函数。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125085838.png" alt="image.png"><br> <code>11.2.2 隐式的表示实例</code></li>
+</ul>
+<hr>
+<ul>
+<li>虽然隐式表达非常不直观，但是它可以用来检测一个固定的点在不在这个几何体上。下面我们来看显式的表示方法。</li>
+</ul>
+<h2 id="11-2-2-显式的表示"><a href="#11-2-2-显式的表示" class="headerlink" title="11.2.2 显式的表示"></a>11.2.2 显式的表示</h2><ul>
+<li>第一种就是直接将几何体给出，比如建模得到的一个复杂几何体。</li>
+<li>第二种就是通过参数映射方式，在一个二维平面中的点我们用对应的函数去映射到三维空间之中，这和展UV的概念类似。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125090534.png" alt="image.png"><br>  <code>11.2.2 参数映射表示法</code></li>
+</ul>
+<hr>
+<p>11.2.3 CSG表示法</p>
+<ul>
+<li>当然几何的表示方法远远不止以上说的这些，CSG（constructive Solid Geometry）就是一种表示法，它是通过两个简单几何体进行各式各样的运算来得到新的几何体，比如交并补等等。这种运算也被称为布尔运算。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125091126.png" alt="image.png"><br>  <code>11.2.3 CSG 的具体案例</code></li>
+</ul>
+<hr>
+<p>11.2.4 距离表示法</p>
+<ul>
+<li>距离表示法也叫做距离场表示法。这种表示法不去定义具体的几何元素，而是定义任意一点到他的距离，最经典的应用就是融球，在星铁中匹诺康尼场景中就有体现。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125091734.png" alt="image.png"><br>  <code>11.2.4 距离场融球案例——星铁</code></li>
+</ul>
+<hr>
+<ul>
+<li>下面我们来细致理解一下距离函数，或者说叫有向距离场。</li>
+<li>首先如果我们想混合两个物体在屏幕上呈现的占比，我们如果直接混合的话，会得到并非平滑过度的值。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125093018.png" alt="image.png"><br>  <code>11.2.4 非平滑过度的直接混合</code></li>
+<li>而SDF函数就可以让我们根据两个面之间的距离关系，平滑的混合这些值，你可以理解为原本其并没有如此细分属性，而距离函数让其本身具备了这样多元的属性，如果我们再对其进行操作，就可以过度的很顺滑了。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241125094040.png" alt="image.png"><br>  <code>11.2.4 SDF函数后的混合方式</code></li>
+</ul>
+<hr>
+<h2 id="11-2-5-显示表示方法示例"><a href="#11-2-5-显示表示方法示例" class="headerlink" title="11.2.5 显示表示方法示例"></a>11.2.5 显示表示方法示例</h2><ul>
+<li>点云，顾名思义，由很多点形成的画面，最具代表性的就是高斯抛雪球方法呈现出来的3维立体建模，感兴趣的同学可以浏览下面网页。</li>
+<li><a target="_blank" rel="noopener" href="https://lumalabs.ai/">https://lumalabs.ai/</a></li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241126104337.png" alt="image.png"><br>  <code>11.2.5 视频生成的AI三维建模</code></li>
+</ul>
+<hr>
+<ul>
+<li>面片，就是引擎与DCC软件中常用到的基本几何形体表示元素。一般多为三角面或四边形，如果在引擎中（Unity举例）打开线框预览模式就能看出整个物体是以一个一个面片组成。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241126105317.png" alt="image.png"><br>  <code>11.2.5.1 Unity中的线框显示</code></li>
+</ul>
+<hr>
+<ul>
+<li>我们的EasyShader使用了一种以这样的数据格式作为代表的模型输入格式——TheWavefront Object File（.OBJ）格式。</li>
+<li>这种格式的特点就是，一切以数值记录，因此存储空间小，我们可以看到有面法线，面纹理坐标，顶点等一系列数据，我们通过读取这些数据，在软件中用我们的算法绘制图形。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241126105046.png" alt="image.png"><br>  <code>11.2.5.2 .obj格式实例</code></li>
+</ul>
+<hr>
+<h2 id="11-2-6-曲线——贝塞尔曲线"><a href="#11-2-6-曲线——贝塞尔曲线" class="headerlink" title="11.2.6 曲线——贝塞尔曲线"></a>11.2.6 曲线——贝塞尔曲线</h2><ul>
+<li>贝塞尔曲线是一种平滑曲线的表示方式，它在很多软件中都有应用，比如平滑运动，或平滑线条线段等等，我们往往通过它来实现一些自由的曲线表示，下面我们来深入了解贝塞尔曲线的原理。</li>
+</ul>
+<hr>
+<ul>
+<li>首先，我们定义曲线的方式可以用近似的思想体现。也就是如果我们希望有一条曲线，那么我们就先定义几条直线。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604204651.png" alt="Pasted image 20240604204651.png"><br>  <code>11.2.6 贝塞尔曲线第一步——找到第一个中心点</code></li>
+<li>在B0到B2的阶段，我们让其拥有一个过渡值b1，想象一下，我们规定从b0到b1需要经过一个单位时间。而我们可以在其上任意取一个时间t，现在假设是t &#x3D; 1&#x2F;3 处。我们在此处可以取一个点，我们将其命名为b01</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604204716.png" alt="Pasted image 20240604204716.png"><br>  <code>11.2.6.1 贝塞尔曲线第二步——找到第一个t时间点</code></li>
+<li>现在，我们只需要继续这个过程，通过不同的参数t就可以绘制出不同样式的贝塞尔曲线了，这种绘制方法叫做二阶贝塞尔曲线。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604204936.png" alt="Pasted image 20240604204936.png"><br>  <code>11.2.6.2 贝塞尔曲线第3-n步——递归绘制</code></li>
+<li>大家可以通过下面这个网站直观地看到演示，还可以跟着互动~</li>
+<li><a target="_blank" rel="noopener" href="https://www.longluo.me/projects/bezier/">https://www.longluo.me/projects/bezier/</a></li>
+</ul>
+<hr>
+<ul>
+<li>下面我们来看它的数学表达式。本质上得出每一个点的过程就是进行线性插值的过程，每一个点都可以用起始点和终点进行线性插值，而且下一层的点一定可以用上一层进行表示</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604214935.png" alt="Pasted image 20240604214935.png"><br>  <code>11.2.6.3 贝塞尔曲线的推导</code></li>
+</ul>
+<hr>
+<ul>
+<li>对于B02我们就可以用最底层的B0 B1以及B2表示</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604215109.png" alt="Pasted image 20240604215109.png"><br>  <code>11.2.6.4 第二阶贝塞尔曲线表达式</code></li>
+<li>你是否能总结出规律？</li>
+<li>没错实际上它就是一个二项式的形式，这样我们就可以使用多项式展开将其扩展到N维。</li>
+</ul>
+<hr>
+<ul>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604215224.png" alt="Pasted image 20240604215224.png"><br>  <code>11.2.6.5 多项式展开</code></li>
+<li>我们进一步总结</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/Pasted%20image%2020240604215242.png" alt="Pasted image 20240604215242.png"><br>  <code>11.2.6.6 N阶贝塞尔曲线表示法</code></li>
+<li>至此我们就可以表述任意曲线了，对三维同样适用，至此我们解决了开头提到的第一个问题，现在你也可以在软件中造出一台精美绝伦的车辆模型了~</li>
+</ul>
+<hr>
+<h2 id="11-2-7-逐段的贝塞尔曲线"><a href="#11-2-7-逐段的贝塞尔曲线" class="headerlink" title="11.2.7 逐段的贝塞尔曲线"></a>11.2.7 逐段的贝塞尔曲线</h2><ul>
+<li>前面我们了解了单独的贝塞尔曲线，但是我们会发现，如果想去定义更复杂的曲线形状，往往单纯用贝塞尔曲线就不够了，我们需要进一步完善这个方法。</li>
+<li>各位在使用PS时应该会发现，有一个很常用但是也很难懂的工具——钢笔工具。</li>
+<li>它本身实际上就是一个多段的贝塞尔曲线，通过这个工具你可以绘制出几乎任意你想要的特定曲线。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241130103911.png" alt="image.png"><br>  <code>11.2.7 Ps中的钢笔工具实例</code></li>
+</ul>
+<hr>
+<ul>
+<li>逐段定义的贝塞尔曲线一般具备四个点，分别是起点终点以及两个对应的控制点。通过调控控制点的位置来控制曲线的弯曲程度。</li>
+<li>逐段链接的贝塞尔曲线也有不同的链接方式，其中在几何上连续的贝塞尔曲线叫做C0连续，也就是第一段贝塞尔曲线的终点与第二段贝塞尔曲线的起点相等。</li>
+<li>而如果他们的切线方向也相同并且控制点等距，我们就称之为C1连续。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241130104749.png" alt="image.png"><br>  <code>11.2.7.1 贝塞尔曲线连续的方式</code></li>
+</ul>
+<hr>
+<h2 id="11-2-8-样条曲线"><a href="#11-2-8-样条曲线" class="headerlink" title="11.2.8 样条曲线"></a>11.2.8 样条曲线</h2><ul>
+<li>样条在很多DCC软件中也有广泛使用，比如blender中颜色渐变节点中渐变方式就有样条这一类型。</li>
+<li>样条本身也是一种曲线，满足一定的连续性，是一种简单可控的曲线。</li>
+<li>B-Splines也叫β样条。叫做基函数样条，我们之前总结出的贝塞尔曲线公式就叫做基函数。β样条也是对贝塞尔曲线的扩展。</li>
+<li>因为贝塞尔曲线牵一发动全身的特点，因此在设计上不符合直觉，因此诞生出来了β样条，它可以对局部的细节进行调整。在此我们不多赘述，感兴趣的同学：</li>
+<li>【清华大学-计算机图形学基础（国家级精品课）】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV13441127CH/?p=13&share_source=copy_web&vd_source=18d60239a339ad21d3b3f050742622f4">https://www.bilibili.com/video/BV13441127CH/?p=13&amp;share_source=copy_web&amp;vd_source=18d60239a339ad21d3b3f050742622f4</a></li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241130110921.png" alt="image.png"><br>  <code>11.2.8 blender中颜色渐变的β样条模式</code></li>
+</ul>
+<hr>
+<h1 id="11-3-曲面"><a href="#11-3-曲面" class="headerlink" title="11.3 曲面"></a>11.3 曲面</h1><h2 id="11-3-1-贝塞尔曲面"><a href="#11-3-1-贝塞尔曲面" class="headerlink" title="11.3.1 贝塞尔曲面"></a>11.3.1 贝塞尔曲面</h2><ul>
+<li>前文我们提到了贝塞尔曲线，它是二维的，在三维中，同样我们也可以利用贝塞尔公式去定义曲面，只不过它是一个数组的形式。</li>
+<li>我们通过在空间中定义一系列的贝塞尔曲线，来获得所需的控制点。通过这些控制点作为一条贝塞尔曲线的表示方法，来形成一个贝塞尔曲面。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/11.3%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E9%9D%A2.png" alt="11.3贝塞尔曲面.png"><br>  <code>11.3.1 贝塞尔曲面的形成</code></li>
+<li>因为贝塞尔曲线的性质，我们可以定义两个参数对应之前我们所提到的UV坐标，通过这两个点的变换，我们就可以得到该曲面在UV坐标上的映射，以此得到UV贴图。</li>
+</ul>
+<hr>
+<h2 id="11-3-2-模型细分"><a href="#11-3-2-模型细分" class="headerlink" title="11.3.2 模型细分"></a>11.3.2 模型细分</h2><ul>
+<li>我们之前了解到，模型是由众多三角面组成。而三角面是由众多顶点组成的，在着色部分我们讲过，增加三角形顶点数量可以拥有更好的着色效果，而增加三角形顶点数量的方法便被成为细分。</li>
+<li>我们在Blender等DCC软件中，细分是一个基础的操作。它本质上就是让模型顶点变化频率增加，能够更加顺滑的体现出细节。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241201112347.png" alt="image.png"><br>  <code>11.3.2 blender中的模型细分</code></li>
+</ul>
+<hr>
+<ul>
+<li>接下来，我们来看它的原理。首先，细分大致可以分为两步操作。</li>
+<li>首先第一步，创建更多新的三角形，这一步很简单，我们可以取原三角形三边中点，分别连线，形成四个新的三角形。这样的划分方式也叫做Loop细分（发明人姓Loop）。</li>
+<li>接下来，我们就需要处理新形成的三角形的位置。</li>
+<li>对于一个新的顶点，往往被几个三角形所共享，我们就可以利用就顶点的位置对新顶点进行加权平均，这样就能获得更加平滑的新三角形。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241201113516.png" alt="image.png"><br>  <code>11.3.2.1 新生成顶点的处理方式</code></li>
+</ul>
+<hr>
+<ul>
+<li>下一步，我们还需要来看老顶点如何更新，新顶点有一部分是要听从于老顶点的变化，因此老顶点的更新十分重要。</li>
+<li>老顶点的更新需要参考两部分，一部分来源于这些老顶点自身，一部分来源于其周围的顶点，同样是进行一定的插值运算，其中有两个参考值，一个是变换目标的’度’,这是图论的概念，实际上很好理解，就是该点与多少个顶点相连接。另一个参考值为u，是根据度来进行的变化，最后通过这两个参考值对图形进行插值。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241201114721.png" alt="image.png"><br>  <code>11.3.2.2 旧顶点的更新方式</code></li>
+</ul>
+<hr>
+<ul>
+<li>非三角面细分</li>
+<li>以上我们提到的Loop细分方法是针对三角面进行细分的，而往往我们在实际操作中遇到的网格体不止有三角面一种。接下来介绍的这种Catmull方法就是针对更普遍的网格细分法。</li>
+<li>我们先将网格分为四边形与非四边形两种类型。随后我们定义一个概念叫做奇异点（Extraordinary vertex），也就是度不为4的点，度的概念希望你还记得，也就是所连接的边的数量。</li>
+<li>我们进行细分的方式就是，首先取三角形中点以及面的中点，并将其连接，我们就能得到一系列新的多边形。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241201115954.png" alt="image.png"><br>  <code>11.3.2.3 CatMull细分法</code></li>
+</ul>
+<hr>
+<ul>
+<li>经过上述变换后，我们会发现，奇异点数量增加了。我们可以总结出规律，在非四边形面中增加点，增加出的一定是一个奇异点，非四边形面都消失了。</li>
+<li>但如果我们继续细分之后奇异点数量就不会再继续增加了。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241201120325.png" alt="image.png"><br>  <code>11.3.2.4 CatMull细分法-进一步细分</code></li>
+<li>CatMull 等细分方法应用的领域非常多，可以提升画面的表现力以及精度，但有些时候，尤其是在游戏里，我们不希望所有的面都是高精度的，这样会很卡，所以就要牵扯到我们的下一个话题，有细分就有简化，接下来我们来看模型面数的简化，比如Lod技术以及UE的独家技术Nannite网格体。</li>
+</ul>
+<hr>
+<h2 id="11-4-模型的简化"><a href="#11-4-模型的简化" class="headerlink" title="11.4 模型的简化"></a>11.4 模型的简化</h2><ul>
+<li>首先，模型的简化与模型的细分相反，是为了减少三角形面数而诞生的优化手段，不同面数的三角形带来的整体质感是不一样的。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241202091427.png" alt="image.png"><br>  <code>11.4 Blender中应用了不同等级的细分修改器后的结果</code></li>
+<li>而对于一些距离我们很遥远的物体，其往往不需要呈现出复杂的细节，因此在游戏中，会将其应用为面数比较低的模型。</li>
+<li>这样的模型先前是需要美术人员手动生成低模，并添加到对应的LOD层级之中。而在Ue中，一种叫做Nannite网格体的技术，可以为我们自动生成这样的低模，今年大火的黑神话就是得益于这样的的技术，让其扫描出的模型能够放心大胆的放入场景之中。</li>
+</ul>
+<hr>
+<h2 id="11-4-1-Nannite网格体"><a href="#11-4-1-Nannite网格体" class="headerlink" title="11.4.1 Nannite网格体"></a>11.4.1 Nannite网格体</h2><ul>
+<li>根据Ue官方文档，我们可以了解到，Nannite在保证帧率流畅的同时，将渲染精度提升了数个数量级。并且支持自动处理细节级别，也就是我们前文提到的LOD。不需要再手动设置这些单个的网格体。</li>
+<li>Ue会根据摄像机远近，自然地调整LOD级别，增加或减少三角形面数。Nannite会将模型拆分为三角形集群，并根据流动只渲染所能见到的细节。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/11.4.1%20Nannite%E7%BD%91%E6%A0%BC%E4%BD%93%E5%AE%9E%E4%BE%8B.png" alt="11.4.1 Nannite网格体实例.png"><br>  <code>11.4.1 Nannite网格体实例</code></li>
+<li>想了解更多内容的各位可以在Ue官方文档中查看</li>
+<li><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/nanite-virtualized-geometry-in-unreal-engine">https://dev.epicgames.com/documentation/zh-cn/unreal-engine/nanite-virtualized-geometry-in-unreal-engine</a></li>
+</ul>
+<hr>
+<h2 id="11-4-2-原理及细节"><a href="#11-4-2-原理及细节" class="headerlink" title="11.4.2 原理及细节"></a>11.4.2 原理及细节</h2><ul>
+<li>接下来，我们来看一下模型简化的原理，是如何做到不破坏原有三角面的大致结构的前提下，还能减少三角面面数的呢？</li>
+<li>边坍缩算法</li>
+<li>边坍缩算法的理解上很简单，我们需要减少三角面数，三角面是由诸多边组成的，我们想要减少三角面数，只需要减少三角边数就好了，也就是将一条边压缩为一个点。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241202095939.png" alt="image.png"><br>  <code>11.4.2 边坍缩算法</code></li>
+</ul>
+<hr>
+<ul>
+<li>原理上很好理解，但实现上并不容易，因为我们会发现，如果单纯的压缩，会导致新生成的模型与原本模型差距巨大。导致模型走样。</li>
+<li>因此我们引入了一个新的方法，叫做二次误差度量，这个意思是我们检测这个新生成的点，到原本的点所在平面的距离的平方和，合适此值最小，何时为最佳生成点。</li>
+<li><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241202100132.png" alt="image.png"><br>  <code>11.4.2.1 二次误差度量</code></li>
+</ul>
+<hr>
+<ul>
+<li>但是面对大量的三角形面，我们需要用更加效率的方式存储并排序，这就涉及到数据结构中的优先队列结构，以及贪心算法了。</li>
+</ul>
+<hr>
+<ul>
+<li>优先队列</li>
+<li>优先队列是一种抽象的数据类型，每个元素都有各自的优先级，优先级最高的元素首先得到服务，通常使用堆实现。是找到我们所需元素的合适结构。</li>
+<li>贪心算法</li>
+<li>贪心算法叫做算法，实际上是一种策略，一切都为了找到最优解，实际上我们所做的这件事本身就是贪心算法的一种体现。</li>
+<li>贪心算法可以有以下几步<ul>
+<li><ol>
+<li>建立数学模型来描述我们的问题</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>将求解问题分出若干子问题，也叫单一原则</li>
+</ol>
+</li>
+<li>3.对每一子问题求解，得到局部最优解</li>
+<li>4.将子问题的局部最优解汇总形成总体最优解。</li>
+</ul>
+</li>
+<li>当然实际的应用有很多，各位可以自行了解。</li>
+<li><a target="_blank" rel="noopener" href="https://pleasant233.oss-cn-beijing.aliyuncs.com/20241202100132.png">https://pleasant233.oss-cn-beijing.aliyuncs.com/20241202100132.png</a></li>
+</ul>
+<hr>
+<h1 id="11-5-写在最后"><a href="#11-5-写在最后" class="headerlink" title="11.5 写在最后"></a>11.5 写在最后</h1><ul>
+<li>至此，我们初入图形学的脚步就告一段落了，回顾我们的历程，一共前前后后写了将近4万多字，大致带领大家与我一起初识了图形学光栅化的入门内容，并且编写了一个大家自己的渲染器。</li>
+<li>我分享本课的目的是总结自己学习的过程，说实话，很多东西第二遍看才算基本弄懂，我也是现学现卖。作为第一节分享课，我们在实践与理论中进行学习，所有枯燥乏味的知识我都尽量通俗并寻找实际应用中的案例讲解。希望各位阅读时不会有太多不理解的地方吧。（尽力了~）</li>
+<li>本系列课将持续增添删改内容。下一部分打算做光线追踪方面的入门课，并且做Shader的语法与基础入门。带领大家正式进入应用的领域。</li>
+<li>最后，再次感谢各位的支持，感谢我校的zy老师，101课程的闫令琪老师等诸多学术大牛的启蒙。祝大家能够在学业中，有所精进，有所收获！我们下一段分享课再见！</li>
+</ul>
+<hr>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>games101图形学入门——闫令琪 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744">https://www.bilibili.com/video/BV1X7411F744</a></li>
+<li>Ue文档 <a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-CN/unreal-engine">https://dev.epicgames.com/documentation/zh-CN/unreal-engine</a></li>
+<li>维基百科 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95">https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Pleasant233</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/">http://example.com/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Pleasant233</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/24/EasyShader5%E2%80%94%E2%80%94%E6%9D%90%E8%B4%A8%E7%AF%87/" title="EasyShader小结——完成材质添加"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">EasyShader小结——完成材质添加</div></div><div class="info-2"><div class="info-item-1">添加UV映射与材质读取输入</div></div></div></a><a class="pagination-related" href="/2025/01/24/hello-template/" title="博客搭建感想"><img class="cover" src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">博客搭建感想</div></div><div class="info-2"><div class="info-item-1">主要流程 本地化部署流程 线上发布流程   本地化部署 前期准备 首先，本地化部署需要提前安装好两个东西，可参考hexo框架官网：https://hexo.io/zh-cn/ 需要下载node.js，同时下载npm，也就是版本管理器，这些可以帮助我们管理博客版本内容。 node.js 官网：https://nodejs.org/zh-cn 你可以直接在官网复制它的代码并且打开本地自带的Windows命令窗口：powershell，粘贴你复制的代码 等待安装完成就可以了   下载git，git主要作用是建立起云端和本地之间的桥梁，让我们能够从云端拉取数据。 同样可以在官网下载：https://git-scm.com/  git安装相对简单，你可以直接全部选择next就自动安装完成了，很无脑！   在安装完成后，本地的环境就基本上搭建完成了。    线上发布： 首先访问：https://github.com/mmdjiji/hexo-template...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-05%20221810.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pleasant233</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Pleasant233" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wangshuq1122@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我不是在教课，我只是在贯彻费曼学习法</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#11-1-%E5%87%A0%E4%BD%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">11.1 几何的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-1-%E5%A4%8D%E6%9D%82%E6%9B%B2%E9%9D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">11.1.1 复杂曲面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-2-%E6%AF%9B%E5%8F%91%E6%B8%B2%E6%9F%93"><span class="toc-number">1.2.</span> <span class="toc-text">11.1.2 毛发渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-3-%E5%87%A0%E4%BD%95%E4%BD%93%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">11.1.3 几何体优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-2-%E5%87%A0%E4%BD%95%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">11.2 几何的表示方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-1-%E9%9A%90%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">11.2.1 隐式的表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-2-%E6%98%BE%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.2.</span> <span class="toc-text">11.2.2 显式的表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-5-%E6%98%BE%E7%A4%BA%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.3.</span> <span class="toc-text">11.2.5 显示表示方法示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-6-%E6%9B%B2%E7%BA%BF%E2%80%94%E2%80%94%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="toc-number">2.4.</span> <span class="toc-text">11.2.6 曲线——贝塞尔曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-7-%E9%80%90%E6%AE%B5%E7%9A%84%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="toc-number">2.5.</span> <span class="toc-text">11.2.7 逐段的贝塞尔曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-8-%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF"><span class="toc-number">2.6.</span> <span class="toc-text">11.2.8 样条曲线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-3-%E6%9B%B2%E9%9D%A2"><span class="toc-number">3.</span> <span class="toc-text">11.3 曲面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-3-1-%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E9%9D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">11.3.1 贝塞尔曲面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-3-2-%E6%A8%A1%E5%9E%8B%E7%BB%86%E5%88%86"><span class="toc-number">3.2.</span> <span class="toc-text">11.3.2 模型细分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-4-%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AE%80%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">11.4 模型的简化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-4-1-Nannite%E7%BD%91%E6%A0%BC%E4%BD%93"><span class="toc-number">3.4.</span> <span class="toc-text">11.4.1 Nannite网格体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-4-2-%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BB%86%E8%8A%82"><span class="toc-number">3.5.</span> <span class="toc-text">11.4.2 原理及细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-5-%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">4.</span> <span class="toc-text">11.5 写在最后</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/hello-template/" title="博客搭建感想"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/background.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客搭建感想"/></a><div class="content"><a class="title" href="/2025/01/24/hello-template/" title="博客搭建感想">博客搭建感想</a><time datetime="2025-01-24T04:36:49.545Z" title="发表于 2025-01-24 04:36:49">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/EasyShader4%E2%80%94%E2%80%94%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E5%8F%98%E7%9F%A9%E9%98%B5/" title="EasyShader——重新定义变换矩阵"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="EasyShader——重新定义变换矩阵"/></a><div class="content"><a class="title" href="/2025/01/24/EasyShader4%E2%80%94%E2%80%94%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E5%8F%98%E7%9F%A9%E9%98%B5/" title="EasyShader——重新定义变换矩阵">EasyShader——重新定义变换矩阵</a><time datetime="2025-01-24T00:00:00.000Z" title="发表于 2025-01-24 00:00:00">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/EasyShader5%E2%80%94%E2%80%94%E6%9D%90%E8%B4%A8%E7%AF%87/" title="EasyShader小结——完成材质添加"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="EasyShader小结——完成材质添加"/></a><div class="content"><a class="title" href="/2025/01/24/EasyShader5%E2%80%94%E2%80%94%E6%9D%90%E8%B4%A8%E7%AF%87/" title="EasyShader小结——完成材质添加">EasyShader小结——完成材质添加</a><time datetime="2025-01-24T00:00:00.000Z" title="发表于 2025-01-24 00:00:00">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/" title="入门图形学11——几何"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学11——几何"/></a><div class="content"><a class="title" href="/2025/01/24/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A611%E2%80%94%E2%80%94%E5%87%A0%E4%BD%95/" title="入门图形学11——几何">入门图形学11——几何</a><time datetime="2025-01-24T00:00:00.000Z" title="发表于 2025-01-24 00:00:00">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/" title="入门图形学10——着色2"><img src="https://pleasant233.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241031191729.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="入门图形学10——着色2"/></a><div class="content"><a class="title" href="/2025/01/22/%E5%85%A5%E9%97%A8%E5%9B%BE%E5%BD%A2%E5%AD%A610%E2%80%94%E2%80%94%E7%9D%80%E8%89%B22/" title="入门图形学10——着色2">入门图形学10——着色2</a><time datetime="2025-01-22T00:00:00.000Z" title="发表于 2025-01-22 00:00:00">2025-01-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Pleasant233</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
