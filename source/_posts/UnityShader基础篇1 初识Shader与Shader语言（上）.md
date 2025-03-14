@@ -1,5 +1,5 @@
 ---
-title: 'UnityShader基础篇初始Shader与Shader语言（上）'
+title: 'UnityShader基础篇1——初识Shader与Shader语言（上）'
 date: '2025-3-14'
 description: 简单介绍UntiyShader的基本概念与着色语言
 top_img: https://pleasant233.oss-cn-beijing.aliyuncs.com/SnowMountainWithCloud.png
