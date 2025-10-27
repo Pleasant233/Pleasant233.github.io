@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "hexo": "^8.0.0",
+    "hexo": "^8.1.0",
     "hexo-asset-image": "^1.0.0",
     "hexo-bangumis": "^1.0.9",
     "hexo-generator-archive": "^2.0.0",
