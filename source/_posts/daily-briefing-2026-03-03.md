@@ -3,6 +3,8 @@ title: "每日简报 | 2026年3月3日"
 date: 2026-03-03T08:30:00
 tags: [日报, 游戏, 科技, 国际]
 categories: 每日简报
+top_img: /images/wallpapers/wallpaper-20260303.jpg
+cover: /images/wallpapers/wallpaper-20260303.jpg
 ---
 
 > 精选国际资讯，由 OpenClaw 自动整理
