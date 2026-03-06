@@ -1,6 +1,6 @@
 ---
 title: "每日简报 | 2026年03月06日"
-date: 2026-03-06T03:20:40
+date: 2026-03-06T08:03:55
 tags: [日报, 游戏, 科技, 国际]
 categories: 每日简报
 top_img: /images/wallpapers/wallpaper-20260306.jpg
@@ -15,37 +15,37 @@ cover: /images/wallpapers/wallpaper-20260306.jpg
 
 ## 🎮 游戏圈热点
 
-**Metroid Prime 4: Beyond Scores a Great Discount on Switch 2 For One Day Only**
-> Metroid Prime 4: Beyond on Nintendo Switch 2 has dropped to $54.99 as part of Woot's 'Video Games For All!' sale. This i...
-> 📎 [IGN](https://www.ign.com/articles/metroid-prime-4-beyond-for-switch-2-is-down-to-55-in-woots-video-game-sale)
+**Slay the Spire 2 Launches, Immediately Shatters a Concurrent Player Record on Steam**
+> Slay the Spire 2 has topped 177k concurrent players on Steam, and is steadily rising, setting a new record for a rogueli...
+> 📎 [IGN](https://www.ign.com/articles/slay-the-spire-2-launches-immediately-shatters-a-concurrent-player-record-on-steam)
 
-**Pokémon Pokopia's First Event Starts Next Week, But You Can Access It Right Now**
-> Pokémon Pokopia is out today (hooray!), and there's a limited-time event on the way later this month that's bringing Hop...
-> 📎 [IGN](https://www.ign.com/articles/pokemon-pokopias-first-event-starts-next-week-but-you-can-access-it-right-now)
+**Elden Ring: Nightreign Players Are Begging For Another Major Update... or Just Everdark Heolstor**
+> It's now been three months since Elden Ring: Nightreign received its paid Forsaken Hollows DLC, which added two new Nigh...
+> 📎 [IGN](https://www.ign.com/articles/elden-ring-nightreign-players-are-begging-for-another-major-update-or-just-everdark-heolstor)
 
 ---
 
 ## 💻 科技前沿
 
-**Hardware testing startup Nominal hits $1B valuation, raises $155M in 10 months**
-> Nominal providers hardware testing equipment to defense tech companies. Founders Fund led the preemptive deal.
-> 📎 [TechCrunch](https://techcrunch.com/2026/03/05/hardware-testing-startup-nominal-hits-1b-valuation-raises-155m-in-10-months/)
+**DiligenceSquared uses AI, voice agents to make M&A research affordable**
+> Instead of relying on expensive management consultants, the startup uses AI voice agents to conduct interviews with cust...
+> 📎 [TechCrunch](https://techcrunch.com/2026/03/05/diligencesquared-uses-ai-voice-agents-to-make-ma-research-affordable/)
 
-**Roblox launches real-time AI chat rephrasing to filter out banned language**
-> The new feature goes beyond Roblox’s current text filter, which simply replaces banned words and phrases with the “#” sy...
-> 📎 [TechCrunch](https://techcrunch.com/2026/03/05/roblox-launches-real-time-ai-chat-rephrasing-to-filter-out-banned-language/)
+**Cluely CEO Roy Lee admits to publicly lying about revenue numbers last year**
+> The $7 million in annual recurring revenue that Cluely CEO Roy Lee shared last summer was a lie, its founder and CEO Roy...
+> 📎 [TechCrunch](https://techcrunch.com/2026/03/05/cluely-ceo-roy-lee-admits-to-publicly-lying-about-revenue-numbers-last-year/)
 
 ---
 
 ## 🌍 国际要闻
 
-**Iran targets headquarters of Iranian Kurdish forces in Iraq**
-> The Iranian military's strikes come amid speculation that the US wants Iranian Kurdish groups to join its conflict with ...
-> 📎 [BBC World](https://www.bbc.com/news/articles/c2k88y1147jo?at_medium=RSS&at_campaign=rss)
+**'What is the game plan?': The Iran war is unsettling China and its ambitions**
+> China is not feeling the shock of war in the Middle East - yet. But it is feeling the ripples.
+> 📎 [BBC World](https://www.bbc.com/news/articles/c2044vzrdpzo?at_medium=RSS&at_campaign=rss)
 
-**US asked Ukraine for help fighting Iranian drones, Zelensky says**
-> Ukraine's president says Kyiv will only help if doing so does not deplete its own air defences.
-> 📎 [BBC World](https://www.bbc.com/news/articles/cr5llg0e9g9o?at_medium=RSS&at_campaign=rss)
+**'We have been preparing': Why the boots on the ground in Iran could be Kurdish**
+> Iranian Kurdish opposition groups in exile in northern Iraq tell the BBC they have plans to cross the border but deny al...
+> 📎 [BBC World](https://www.bbc.com/news/articles/cm215nnjyr0o?at_medium=RSS&at_campaign=rss)
 
 ---
 
