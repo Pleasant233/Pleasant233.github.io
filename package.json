@@ -15,7 +15,7 @@
     "bluebird": "^3.7.2",
     "hexo": "^8.1.2",
     "hexo-asset-image": "^1.0.0",
-    "hexo-bangumis": "^1.0.9",
+    "hexo-bangumis": "^1.1.4",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
